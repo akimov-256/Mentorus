@@ -41,7 +41,7 @@ ApplicationWindow {
 
             FontLoader {
                 id: appFont
-                source: "qrc:/assets/fonts/Lexend.ttf"
+                source: "qrc:/qt/qml/Mentorus/assets/fonts/Lexend.ttf"
             }
 
             // Add the app name
@@ -79,17 +79,19 @@ ApplicationWindow {
 
             // Add window control buttons
             RowLayout {
+                spacing: 0
+
                 Layout.alignment: Qt.AlignVCenter
 
                 WindowButton {
                     id: minimize
-                    buttonIcon: "qrc:/assets/icons/minimize.png"
+                    buttonIcon: "qrc:/qt/qml/Mentorus/assets/icons/minimize.png"
                     onClicked: root.showMinimized()
                 }
 
                 WindowButton {
                     id: maximize
-                    buttonIcon: root.isMaximized ? "qrc:/assets/icons/restore.png" : "qrc:/assets/icons/maximize.png"
+                    buttonIcon: root.isMaximized ? "qrc:/qt/qml/Mentorus/assets/icons/restore.png" : "qrc:/qt/qml/Mentorus/assets/icons/maximize.png"
                     onClicked:
                     {
                         if (root.isMaximized)
@@ -101,7 +103,7 @@ ApplicationWindow {
 
                 WindowButton {
                     id: close
-                    buttonIcon: "qrc:/assets/icons/close.png"
+                    buttonIcon: "qrc:/qt/qml/Mentorus/assets/icons/close.png"
                     hoverColor: "#ff0000"
                     clickColor: "#700000"
                     onClicked: root.close()

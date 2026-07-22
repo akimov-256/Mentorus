@@ -21,9 +21,14 @@ qt_add_qml_module(appMentorus
     URI Mentorus
     QML_FILES
         qml/Main.qml
-        QML_FILES
-        QML_FILES qml/components/WindowButton.qml
-        RESOURCES resources.qrc
+        qml/components/WindowButton.qml
+
+    RESOURCES
+        assets/fonts/Lexend.ttf
+        assets/icons/close.png
+        assets/icons/maximize.png
+        assets/icons/minimize.png
+        assets/icons/restore.png
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
