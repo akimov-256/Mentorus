@@ -14,13 +14,13 @@ if (EXISTS "${CMAKE_CURRENT_LIST_DIR}/importedcontent/CMakeLists.txt")
 endif()
 
 qt_add_executable(appMentorus
-    main.cpp
+    src/main.cpp
 )
 
 qt_add_qml_module(appMentorus
     URI Mentorus
     QML_FILES
-        Main.qml
+        qml/Main.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
