@@ -17,6 +17,8 @@ Item {
         RowLayout {
             anchors.fill: parent
 
+            spacing: 0
+
             // Previous Chats list
             Rectangle {
                 id: chatsList
@@ -24,9 +26,9 @@ Item {
                 Layout.preferredWidth: 300
                 Layout.fillHeight: true
 
-                color: ColorPalette.dark
-                border.color: ColorPalette.midGray
-                border.width: 1
+                color: ColorPalette.reallyDark
+                border.color: ColorPalette.dark
+                border.width: 2
 
                 ColumnLayout {
                     anchors.fill: parent
@@ -41,7 +43,12 @@ Item {
                         buttonHeight: 32
                         buttonWidth: 270
 
+                        buttonFillColor: ColorPalette.accentGreen
+                        buttonHoverColor: ColorPalette.accentGreenHover
+                        buttonPressColor: ColorPalette.accentGreenPressed
+
                         buttonText: "New Chat"
+                        buttonTextSize: 16
                     }
 
                     Item {
@@ -54,8 +61,14 @@ Item {
             ColumnLayout {
                 id: currentChat
 
+                spacing: 0
+
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+
+                TopBar {
+
+                }
 
                 Rectangle {
                     Layout.fillHeight: true

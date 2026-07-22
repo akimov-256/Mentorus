@@ -1,14 +1,17 @@
 import QtQuick 2.15
 import QtQuick.Layouts
-import "../theme"
 
 
 Item {
     id: root
 
+    property color buttonFillColor
+    property color buttonHoverColor
+    property color buttonPressColor
     property int buttonHeight
     property int buttonWidth
     property string buttonText
+    property int buttonTextSize
 
     signal clicked()
 
@@ -24,7 +27,7 @@ Item {
         anchors.fill: parent
 
         // Handle color and scale when actions are detected
-        color: mouseArea.pressed ? ColorPalette.accentGreenPressed : mouseArea.containsMouse ? ColorPalette.accentGreenHover : ColorPalette.accentGreen
+        color: mouseArea.pressed ? buttonPressColor : mouseArea.containsMouse ? buttonHoverColor : buttonFillColor
         scale: mouseArea.pressed ? 0.99 : 1.0
 
         radius: 5
@@ -61,7 +64,7 @@ Item {
             text: buttonText
 
             font.family: appFont.name
-            font.pixelSize: 16
+            font.pixelSize: buttonTextSize
             color: "#000000"
         }
     }

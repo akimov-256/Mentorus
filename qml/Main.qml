@@ -120,7 +120,7 @@ ApplicationWindow {
             bottom: parent.bottom
         }
 
-        color: light
+        color: ColorPalette.surface
 
         MainPage {
             anchors.fill: parent
