@@ -52,6 +52,15 @@ Item {
                     Layout.fillWidth: true
                 }
 
+                LineEdit {
+                    id: search
+
+                    Layout.rightMargin: 15
+                    Layout.alignment: Qt.AlignVCenter
+
+                    placeHolderText: "Search..."
+                }
+
                 // Create the settings button
                 UiButton {
                     id: settingsButton
