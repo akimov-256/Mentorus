@@ -76,6 +76,22 @@ Item {
 
                     color: "transparent"
                 }
+
+                // Add the bottom border
+                Rectangle {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 1
+
+                    color: ColorPalette.dark
+                }
+            }
+
+            // Add the right border
+            Rectangle {
+                Layout.fillHeight: true
+                Layout.preferredWidth: 1
+
+                color: ColorPalette.dark
             }
         }
     }

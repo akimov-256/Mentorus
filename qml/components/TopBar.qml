@@ -18,6 +18,14 @@ Item {
 
         spacing: 0
 
+        // Add the top border
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 1
+
+            color: ColorPalette.dark
+        }
+
         // Create the Top Bar
         Rectangle {
             id: background
