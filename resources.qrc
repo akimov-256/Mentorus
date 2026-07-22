@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/assets">
+        <file>fonts/Lexend.ttf</file>
+        <file>icons/restore.png</file>
+        <file>icons/close.png</file>
+        <file>icons/maximize.png</file>
+        <file>icons/minimize.png</file>
+    </qresource>
+</RCC>
