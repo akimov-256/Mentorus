@@ -24,7 +24,7 @@ Item {
 
         anchors.fill: parent
 
-        color: ColorPalette.light
+        color: ColorPalette.isLight ? ColorPalette.light : ColorPalette.deepDark
 
         RowLayout {
             anchors.fill: parent

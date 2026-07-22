@@ -122,7 +122,13 @@ ApplicationWindow {
             bottom: parent.bottom
         }
 
-        color: ColorPalette.surface
+        color: ColorPalette.isLight ? ColorPalette.surface : ColorPalette.deepDark
+
+        Behavior on color {
+            ColorAnimation {
+                duration: 80
+            }
+        }
 
         MainPage {
             anchors.fill: parent

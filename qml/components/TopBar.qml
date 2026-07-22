@@ -25,7 +25,13 @@ Item {
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            color: ColorPalette.surface
+            color: ColorPalette.isLight ? ColorPalette.surface : ColorPalette.reallyDark
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 80
+                }
+            }
 
             RowLayout {
                 anchors.fill: parent
@@ -44,7 +50,7 @@ Item {
                     font.family: appFont.name
                     font.pixelSize: 22
 
-                    color: ColorPalette.reallyDark
+                    color: ColorPalette.isLight ? ColorPalette.reallyDark : ColorPalette.surface
                 }
 
                 // Add space holder
@@ -69,15 +75,20 @@ Item {
                     Layout.rightMargin: 15
                     Layout.alignment: Qt.AlignVCenter
 
-                    buttonText: "☾"
+                    buttonText: ColorPalette.isLight ? "☾" : "☀"
                     buttonTextSize: 20
+                    buttonTextColor: ColorPalette.isLight ? ColorPalette.reallyDark : ColorPalette.surface
 
                     buttonHeight: 35
                     buttonWidth: 35
 
                     buttonFillColor: background.color
-                    buttonHoverColor: ColorPalette.reallyLight
-                    buttonPressColor: ColorPalette.light
+                    buttonHoverColor: ColorPalette.isLight ? ColorPalette.reallyLight : ColorPalette.midGray
+                    buttonPressColor: ColorPalette.isLight ? ColorPalette.light : ColorPalette.dark
+
+                    onClicked: {
+                        ColorPalette.isLight = !ColorPalette.isLight
+                    }
                 }
 
                 // Create the settings button
@@ -89,13 +100,14 @@ Item {
 
                     buttonText: "🌣"
                     buttonTextSize: 20
+                    buttonTextColor: ColorPalette.isLight ? ColorPalette.reallyDark : ColorPalette.surface
 
                     buttonHeight: 35
                     buttonWidth: 35
 
                     buttonFillColor: background.color
-                    buttonHoverColor: ColorPalette.reallyLight
-                    buttonPressColor: ColorPalette.light
+                    buttonHoverColor: ColorPalette.isLight ? ColorPalette.reallyLight : ColorPalette.midGray
+                    buttonPressColor: ColorPalette.isLight ? ColorPalette.light : ColorPalette.dark
                 }
             }
         }
@@ -103,9 +115,9 @@ Item {
         // Add the bottom border
         Rectangle {
             Layout.fillWidth: true
-            Layout.preferredHeight: 2
+            Layout.preferredHeight: 1
 
-            color: ColorPalette.midGray
+            color: ColorPalette.dark
         }
     }
 }

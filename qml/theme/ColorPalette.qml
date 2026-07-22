@@ -3,6 +3,9 @@ pragma Singleton
 import QtQuick 2.15
 
 QtObject {
+    property bool isLight: true
+
+    property color deepDark: "#1f1f1f"
     property color reallyDark: "#262626"
     property color dark: "#444442"
     property color midGray: "#9a9a97"

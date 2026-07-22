@@ -8,6 +8,7 @@ Item {
     property color buttonFillColor
     property color buttonHoverColor
     property color buttonPressColor
+    property color buttonTextColor
     property int buttonHeight
     property int buttonWidth
     property string buttonText
@@ -65,7 +66,7 @@ Item {
 
             font.family: appFont.name
             font.pixelSize: buttonTextSize
-            color: "#000000"
+            color: buttonTextColor
         }
     }
 }
