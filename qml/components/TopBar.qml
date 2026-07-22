@@ -59,6 +59,7 @@ Item {
                     Layout.alignment: Qt.AlignVCenter
 
                     placeHolderText: "Search..."
+                    iconPath: "qrc:/qt/qml/Mentorus/assets/icons/search.png"
                 }
 
                 // Create the settings button

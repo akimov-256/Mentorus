@@ -31,6 +31,7 @@ qt_add_qml_module(appMentorus
         qml/components/UiButton.qml
         qml/components/TopBar.qml
         qml/theme/ColorPalette.qml
+        qml/components/LineEdit.qml
 
     RESOURCES
         assets/fonts/Lexend.ttf
@@ -38,7 +39,7 @@ qt_add_qml_module(appMentorus
         assets/icons/maximize.png
         assets/icons/minimize.png
         assets/icons/restore.png
-        QML_FILES qml/components/LineEdit.qml
+        assets/icons/search.png
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

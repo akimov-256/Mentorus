@@ -8,6 +8,7 @@ Item {
     id: root
 
     property string placeHolderText
+    property string iconPath
 
     Layout.preferredHeight: 35
     Layout.preferredWidth: 350
@@ -26,7 +27,23 @@ Item {
         color: ColorPalette.light
 
         RowLayout {
+            anchors.fill: parent
 
+            spacing: 0
+
+            Image {
+                id: icon
+
+                Layout.leftMargin: 5
+                Layout.alignment: Qt.AlignVCenter
+
+                Layout.preferredHeight: 20
+                Layout.preferredWidth: 20
+
+                source: iconPath
+            }
+
+            // Add the text field
             TextField {
                 Layout.fillWidth: true
 
