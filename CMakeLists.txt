@@ -17,11 +17,20 @@ qt_add_executable(appMentorus
     src/main.cpp
 )
 
+set_source_files_properties(
+    qml/theme/ColorPalette.qml
+    PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+)
+
 qt_add_qml_module(appMentorus
     URI Mentorus
     QML_FILES
         qml/Main.qml
         qml/components/WindowButton.qml
+        qml/pages/MainPage.qml
+        qml/components/UiButton.qml
+        qml/components/TopBar.qml
+        qml/theme/ColorPalette.qml
 
     RESOURCES
         assets/fonts/Lexend.ttf
@@ -29,8 +38,6 @@ qt_add_qml_module(appMentorus
         assets/icons/maximize.png
         assets/icons/minimize.png
         assets/icons/restore.png
-        QML_FILES qml/pages/MainPage.qml
-        QML_FILES qml/components/UiButton.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

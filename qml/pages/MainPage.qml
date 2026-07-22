@@ -1,13 +1,11 @@
 import QtQuick 2.15
 import QtQuick.Layouts
 import "../components"
+import "../theme"
 
 
 Item {
     id: root
-
-    property color fillColor
-    property color borderColor
 
     Rectangle {
         id: background
@@ -26,9 +24,9 @@ Item {
                 Layout.preferredWidth: 300
                 Layout.fillHeight: true
 
-                color: fillColor
-                border.color: borderColor
-                border.width: 2
+                color: ColorPalette.dark
+                border.color: ColorPalette.midGray
+                border.width: 1
 
                 ColumnLayout {
                     anchors.fill: parent
@@ -39,9 +37,6 @@ Item {
 
                         Layout.margins: 15
                         Layout.alignment: Qt.AlignHCenter
-
-                        buttonFillColor: "gray"
-                        buttonBorderColor: borderColor
 
                         buttonHeight: 32
                         buttonWidth: 270

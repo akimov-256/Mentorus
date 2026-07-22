@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls.Basic
 import "components"
 import "pages"
+import "theme"
 
 
 ApplicationWindow {
@@ -14,10 +15,6 @@ ApplicationWindow {
     visible: true
     title: "Mentorus"
     property bool lightMode: Application.styleHints.colorScheme === Qt.Light
-    property color reallyDark: "#1f1f1f"
-    property color dark: "#262626"
-    property color reallyLight: "#e7e7e7"
-    property color light: "#e0e0e0"
 
     FontLoader {
         id: appFont
@@ -36,7 +33,7 @@ ApplicationWindow {
         width: parent.width
         height: 26.25
 
-        color: "#000000"
+        color: ColorPalette.reallyDark
 
         // Add title bar content
         RowLayout {
@@ -127,9 +124,6 @@ ApplicationWindow {
 
         MainPage {
             anchors.fill: parent
-
-            fillColor: "white"
-            borderColor: "#919191"
         }
     }
 }

@@ -1,12 +1,11 @@
 import QtQuick 2.15
 import QtQuick.Layouts
+import "../theme"
 
 
 Item {
     id: root
 
-    property color buttonFillColor
-    property color buttonBorderColor
     property int buttonHeight
     property int buttonWidth
     property string buttonText
@@ -25,11 +24,9 @@ Item {
         anchors.fill: parent
 
         // Handle color and scale when actions are detected
-        color: mouseArea.pressed ? Qt.darker(buttonFillColor, 1.2) : mouseArea.containsMouse ? Qt.lighter(buttonFillColor, 1.2) : buttonFillColor
+        color: mouseArea.pressed ? ColorPalette.accentGreenPressed : mouseArea.containsMouse ? ColorPalette.accentGreenHover : ColorPalette.accentGreen
         scale: mouseArea.pressed ? 0.99 : 1.0
 
-        border.color: buttonBorderColor
-        border.width: 2
         radius: 5
 
         // Handle transitions
