@@ -62,6 +62,24 @@ Item {
                     iconPath: "qrc:/qt/qml/Mentorus/assets/icons/search.png"
                 }
 
+                // Create the color button
+                UiButton {
+                    id: colorButton
+
+                    Layout.rightMargin: 15
+                    Layout.alignment: Qt.AlignVCenter
+
+                    buttonText: "☾"
+                    buttonTextSize: 20
+
+                    buttonHeight: 35
+                    buttonWidth: 35
+
+                    buttonFillColor: background.color
+                    buttonHoverColor: ColorPalette.reallyLight
+                    buttonPressColor: ColorPalette.light
+                }
+
                 // Create the settings button
                 UiButton {
                     id: settingsButton
