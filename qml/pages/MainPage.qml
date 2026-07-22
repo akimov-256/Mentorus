@@ -33,13 +33,14 @@ Item {
                 ColumnLayout {
                     anchors.fill: parent
 
+                    // Add the new chat button
                     UiButton {
                         id: newChatButton
 
                         Layout.margins: 15
                         Layout.alignment: Qt.AlignHCenter
 
-                        buttonFillColor: fillColor
+                        buttonFillColor: "gray"
                         buttonBorderColor: borderColor
 
                         buttonHeight: 32
