@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
+          - os: ubuntu-22.04
             platform: linux
           - os: windows-latest
             platform: windows
@@ -54,7 +54,7 @@ jobs:
           wget -q "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt.AppImage
           chmod +x linuxdeployqt.AppImage
 
-          ./linuxdeployqt.AppImage "$APPDIR/${{ env.APP_NAME }}" -qmake="$Qt6_DIR/bin/qmake" -bundle-non-qt-libs -verbose=1
+          ./linuxdeployqt.AppImage "$APPDIR/${{ env.APP_NAME }}" -qmake="$(command -v qmake6 || command -v qmake)" -bundle-non-qt-libs -verbose=1
 
           cd package
           tar -czf ../${{ env.APP_NAME }}-linux-x86_64.tar.gz ${{ env.APP_NAME }}
@@ -68,7 +68,7 @@ jobs:
           New-Item -ItemType Directory -Force -Path $AppDir | Out-Null
           Copy-Item "build\${{ env.BUILD_TYPE }}\${{ env.APP_NAME }}.exe" -Destination $AppDir
 
-          & "$env:Qt6_DIR\bin\windeployqt.exe" --release "$AppDir\${{ env.APP_NAME }}.exe"
+          & windeployqt.exe --release "$AppDir\${{ env.APP_NAME }}.exe"
 
           Compress-Archive -Path "$AppDir\*" -DestinationPath "${{ env.APP_NAME }}-windows-x86_64.zip"
 
