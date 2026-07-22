@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Basic
 import "components"
+import "pages"
 
 
 ApplicationWindow {
@@ -123,5 +124,12 @@ ApplicationWindow {
         }
 
         color: light
+
+        MainPage {
+            anchors.fill: parent
+
+            fillColor: "white"
+            borderColor: "#919191"
+        }
     }
 }
