@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Layouts
+import "../components"
 
 
 Item {
@@ -28,21 +29,41 @@ Item {
                 color: fillColor
                 border.color: borderColor
                 border.width: 2
+
+                ColumnLayout {
+                    anchors.fill: parent
+
+                    UiButton {
+                        id: newChatButton
+
+                        Layout.margins: 15
+                        Layout.alignment: Qt.AlignHCenter
+
+                        buttonFillColor: fillColor
+                        buttonBorderColor: borderColor
+
+                        buttonHeight: 32
+                        buttonWidth: 270
+
+                        buttonText: "New Chat"
+                    }
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+                }
             }
 
             // Current Chat
             ColumnLayout {
                 id: currentChat
 
-                anchors {
-                    top: parent.top
-                    right: parent.right
-                    left: chatsList.right
-                    bottom: parent.bottom
-                }
+                Layout.fillHeight: true
+                Layout.fillWidth: true
 
                 Rectangle {
-                    anchors.fill: parent
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
 
                     color: "transparent"
                 }

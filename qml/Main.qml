@@ -19,6 +19,11 @@ ApplicationWindow {
     property color reallyLight: "#e7e7e7"
     property color light: "#e0e0e0"
 
+    FontLoader {
+        id: appFont
+        source: "qrc:/qt/qml/Mentorus/assets/fonts/Lexend.ttf"
+    }
+
     flags: Qt.Window | Qt.FramelessWindowHint
 
     onWindowStateChanged: {
@@ -39,11 +44,6 @@ ApplicationWindow {
 
             anchors.fill: parent
             anchors.leftMargin: 10
-
-            FontLoader {
-                id: appFont
-                source: "qrc:/qt/qml/Mentorus/assets/fonts/Lexend.ttf"
-            }
 
             // Add the app name
             Text {
