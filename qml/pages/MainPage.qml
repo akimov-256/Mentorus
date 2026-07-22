@@ -70,11 +70,8 @@ Item {
 
                 }
 
-                Rectangle {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
+                Dashboard {
 
-                    color: "transparent"
                 }
 
                 // Add the bottom border
