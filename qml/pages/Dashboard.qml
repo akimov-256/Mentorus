@@ -153,6 +153,32 @@ Item {
                 }
             }
 
+            // Create recent chats and today's plan cards
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.leftMargin: 30
+                Layout.rightMargin: 30
+
+                spacing: 20
+
+                ListCard {
+                    id: recentChats
+
+                    cardTitle: "Recent chats"
+
+                    firstLine: "Photosynthesis basics"
+                    secondLine: "Newton's second law"
+                }
+
+                ListCard {
+                    id: todayPlan
+
+                    cardTitle: "Today's plan"
+
+                    firstLine: "9:00 — Algebra review"
+                    secondLine: "14:00 — Chemistry quiz"
+                }
+            }
 
             Item {
                 Layout.fillHeight: true
