@@ -11,6 +11,7 @@ Item {
     property color buttonTextColor
     property int buttonHeight
     property int buttonWidth
+    property int iconHeight
     property string buttonText
     property int buttonTextSize
     property string iconPath
@@ -62,17 +63,15 @@ Item {
         RowLayout {
             anchors.centerIn: parent
 
-            spacing: 10
-
             Item {
                 Layout.fillWidth: true
             }
 
             // Set button icon
             Image {
-                Layout.alignment: Qt.AlignVCenter
-                Layout.preferredHeight: 32
-                Layout.preferredWidth: 32
+                Layout.alignment: Qt.AlignCenter
+                Layout.preferredHeight: iconHeight
+                Layout.preferredWidth: iconHeight
 
                 source: iconPath
 

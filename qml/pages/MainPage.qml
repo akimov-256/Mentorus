@@ -136,7 +136,7 @@ Item {
 
                 }
 
-                Dashboard {
+                AiChat {
 
                 }
 

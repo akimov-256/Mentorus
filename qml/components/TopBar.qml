@@ -69,6 +69,11 @@ Item {
                 LineEdit {
                     id: search
 
+                    boxHeignt: 35
+                    boxWidth: 350
+
+                    hasButton: false
+
                     Layout.rightMargin: 15
                     Layout.alignment: Qt.AlignVCenter
 

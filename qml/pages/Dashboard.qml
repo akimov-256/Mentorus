@@ -77,6 +77,7 @@ Item {
                 buttonTextColor: ColorPalette.accentGreenText
 
                 iconPath: "qrc:/qt/qml/Mentorus/assets/icons/star.png"
+                iconHeight: 32
             }
 
             // Create quick action cards

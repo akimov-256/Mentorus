@@ -7,11 +7,14 @@ import "../theme"
 Item {
     id: root
 
+    property int boxHeignt
+    property int boxWidth
     property string placeHolderText
     property string iconPath
+    property bool hasButton: true
 
-    Layout.preferredHeight: 35
-    Layout.preferredWidth: 350
+    Layout.preferredHeight: boxHeignt
+    Layout.preferredWidth: boxWidth
 
     FontLoader {
         id: appFont
@@ -25,6 +28,9 @@ Item {
         anchors.fill: parent
 
         color: ColorPalette.isLight ? ColorPalette.light : ColorPalette.deepDark
+        border.color: ColorPalette.midGray
+        border.width: 1
+
         radius: 5
 
         RowLayout {
@@ -42,6 +48,8 @@ Item {
                 Layout.preferredWidth: 20
 
                 source: iconPath
+
+                visible: iconPath !== ""
             }
 
             // Add the text field
@@ -59,7 +67,25 @@ Item {
                 background: Rectangle {
                     color: "transparent"
                 }
+            }
 
+            UiButton {
+                id: sendButton
+
+                Layout.alignment: Qt.AlignLeft
+                Layout.margins: 5
+
+                buttonHeight: root.height - 10
+                buttonWidth: buttonHeight
+
+                buttonFillColor: ColorPalette.accentGreen
+                buttonHoverColor: ColorPalette.accentGreenHover
+                buttonPressColor: ColorPalette.accentGreenPressed
+
+                iconPath: "qrc:/qt/qml/Mentorus/assets/icons/send.png"
+                iconHeight: buttonHeight - 10
+
+                visible: hasButton
             }
         }
     }
