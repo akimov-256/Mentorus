@@ -60,7 +60,7 @@ Item {
                 font.pixelSize: 16
 
                 placeholderTextColor: ColorPalette.midGray
-                color: ColorPalette.dark
+                color: ColorPalette.isLight ? ColorPalette.dark : ColorPalette.surface
 
                 placeholderText: placeHolderText
 
