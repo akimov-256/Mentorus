@@ -33,22 +33,88 @@ Item {
                 ColumnLayout {
                     anchors.fill: parent
 
-                    // Add the new chat button
-                    UiButton {
-                        id: newChatButton
+                    SidebarButton {
+                        id: dashboard
 
-                        Layout.margins: 15
                         Layout.alignment: Qt.AlignHCenter
+                        Layout.topMargin: 30
+                        Layout.leftMargin: 15
+                        Layout.rightMargin: 15
 
-                        buttonHeight: 32
-                        buttonWidth: 270
+                        activated: true
 
-                        buttonFillColor: ColorPalette.accentGreen
-                        buttonHoverColor: ColorPalette.accentGreenHover
-                        buttonPressColor: ColorPalette.accentGreenPressed
+                        label: "Dashboard"
+                        iconPath: "qrc:/qt/qml/Mentorus/assets/icons/home.png"
+                    }
 
-                        buttonText: "New Chat"
-                        buttonTextSize: 16
+                    // Add the new chat button
+                    SidebarButton {
+                        id: aiChat
+
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.leftMargin: 15
+                        Layout.rightMargin: 15
+
+                        activated: false
+
+                        label: "AI chat"
+                        iconPath: "qrc:/qt/qml/Mentorus/assets/icons/chat.png"
+                    }
+
+                    // Add the quiz generator button
+                    SidebarButton {
+                        id: quizGenerator
+
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.leftMargin: 15
+                        Layout.rightMargin: 15
+
+                        activated: false
+
+                        label: "Quiz generator"
+                        iconPath: "qrc:/qt/qml/Mentorus/assets/icons/quizg.png"
+                    }
+
+                    // Add the flashcards button
+                    SidebarButton {
+                        id: flashcards
+
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.leftMargin: 15
+                        Layout.rightMargin: 15
+
+                        activated: false
+
+                        label: "Flashcards"
+                        iconPath: "qrc:/qt/qml/Mentorus/assets/icons/cardsg.png"
+                    }
+
+                    // Add the study planner button
+                    SidebarButton {
+                        id: studyPlanner
+
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.leftMargin: 15
+                        Layout.rightMargin: 15
+
+                        activated: false
+
+                        label: "Study planner"
+                        iconPath: "qrc:/qt/qml/Mentorus/assets/icons/calendarg.png"
+                    }
+
+                    // Add the settings button
+                    SidebarButton {
+                        id: settings
+
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.leftMargin: 15
+                        Layout.rightMargin: 15
+
+                        activated: false
+
+                        label: "Settings"
+                        iconPath: "qrc:/qt/qml/Mentorus/assets/icons/settingsg.png"
                     }
 
                     Item {

@@ -34,6 +34,9 @@ qt_add_qml_module(appMentorus
         qml/components/LineEdit.qml
         qml/pages/Dashboard.qml
         qml/components/QuickActionsCard.qml
+        qml/components/StatCard.qml
+        qml/components/ListCard.qml
+        qml/components/SidebarButton.qml
 
     RESOURCES
         assets/fonts/Lexend.ttf
@@ -44,11 +47,16 @@ qt_add_qml_module(appMentorus
         assets/icons/search.png
         assets/icons/book.png
         assets/icons/quiz.png
+        assets/icons/quizg.png
         assets/icons/cards.png
+        assets/icons/cardsg.png
         assets/icons/calendar.png
+        assets/icons/calendarg.png
         assets/icons/star.png
-        QML_FILES qml/components/StatCard.qml
-        QML_FILES qml/components/ListCard.qml
+        assets/icons/chat.png
+        assets/icons/home.png
+        assets/icons/settingsb.png
+        assets/icons/settingsg.png
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
