@@ -25,6 +25,7 @@ Item {
         anchors.fill: parent
 
         color: ColorPalette.isLight ? ColorPalette.light : ColorPalette.deepDark
+        radius: 5
 
         RowLayout {
             anchors.fill: parent
@@ -34,7 +35,7 @@ Item {
             Image {
                 id: icon
 
-                Layout.leftMargin: 5
+                Layout.leftMargin: 10
                 Layout.alignment: Qt.AlignVCenter
 
                 Layout.preferredHeight: 20
