@@ -68,7 +68,10 @@ Item {
                 buttonPressColor: ColorPalette.accentGreenPressed
 
                 buttonText: "Ask anything"
-                buttonTextSize: 20
+                buttonTextSize: 22
+                buttonTextColor: ColorPalette.accentGreenText
+
+                iconPath: "qrc:/qt/qml/Mentorus/assets/icons/star.png"
             }
 
             // Create quick action cards

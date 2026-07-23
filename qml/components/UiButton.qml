@@ -13,6 +13,7 @@ Item {
     property int buttonWidth
     property string buttonText
     property int buttonTextSize
+    property string iconPath
 
     signal clicked()
 
@@ -58,15 +59,40 @@ Item {
             }
         }
 
-        // Set button text
-        Text {
+        RowLayout {
             anchors.centerIn: parent
 
-            text: buttonText
+            spacing: 10
 
-            font.family: appFont.name
-            font.pixelSize: buttonTextSize
-            color: buttonTextColor
+            Item {
+                Layout.fillWidth: true
+            }
+
+            // Set button icon
+            Image {
+                Layout.alignment: Qt.AlignVCenter
+                Layout.preferredHeight: 32
+                Layout.preferredWidth: 32
+
+                source: iconPath
+
+                visible: iconPath !== ""
+            }
+
+            // Set button text
+            Text {
+                Layout.alignment: Qt.AlignVCenter
+
+                text: buttonText
+
+                font.family: appFont.name
+                font.pixelSize: buttonTextSize
+                color: buttonTextColor
+            }
+
+            Item {
+                Layout.fillWidth: true
+            }
         }
     }
 }
