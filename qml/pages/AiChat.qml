@@ -35,6 +35,28 @@ Item {
                 Layout.fillHeight: true
             }
 
+            MessageBubble {
+                id: message1
+
+                Layout.preferredHeight: 70
+                Layout.preferredWidth: 600
+                Layout.alignment: Qt.AlignLeft
+                Layout.margins: 15
+
+                fromUser: false
+            }
+
+            MessageBubble {
+                id: message2
+
+                Layout.preferredHeight: 100
+                Layout.preferredWidth: 600
+                Layout.alignment: Qt.AlignRight
+                Layout.margins: 15
+
+                fromUser: true
+            }
+
             LineEdit {
                 id: search
 

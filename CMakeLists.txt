@@ -59,6 +59,7 @@ qt_add_qml_module(appMentorus
         assets/icons/settingsb.png
         assets/icons/settingsg.png
         assets/icons/send.png
+        QML_FILES qml/components/MessageBubble.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

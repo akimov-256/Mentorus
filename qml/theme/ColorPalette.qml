@@ -14,6 +14,7 @@ QtObject {
     property color surface: "#f5f5f4"
 
     property color accentGreen: "#6cb35e"
+    property color accentGreenSoft: "#a8d5a0"
     property color accentGreenHover: "#4f9142"
     property color accentGreenPressed: "#3b7230"
     property color accentGreenTint: "#e4f0e2"
