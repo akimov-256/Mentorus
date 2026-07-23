@@ -47,6 +47,7 @@ qt_add_qml_module(appMentorus
         assets/icons/cards.png
         assets/icons/calendar.png
         assets/icons/star.png
+        QML_FILES qml/components/StatCard.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

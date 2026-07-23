@@ -31,34 +31,39 @@ Item {
         ColumnLayout {
             anchors.fill: parent
 
+            spacing: 20
+
             // Add welcome text
-            Text {
-                Layout.topMargin: 40
-                Layout.leftMargin: 30
+            ColumnLayout {
+                Text {
+                    Layout.topMargin: 40
+                    Layout.leftMargin: 30
 
-                text: "Welcome back,"
+                    text: "Welcome back,"
 
-                font.family: appFont.name
-                font.pixelSize: 32
-                color: ColorPalette.isLight ? ColorPalette.deepDark : ColorPalette.reallyLight
+                    font.family: appFont.name
+                    font.pixelSize: 32
+                    color: ColorPalette.isLight ? ColorPalette.deepDark : ColorPalette.reallyLight
+                }
+
+                Text {
+                    Layout.leftMargin: 30
+
+                    text: "Pick up where you left off, or start something new."
+
+                    font.family: appFont.name
+                    font.pixelSize: 22
+                    color: ColorPalette.midGray
+                }
             }
 
-            Text {
-                Layout.leftMargin: 30
-
-                text: "Pick up where you left off, or start something new."
-
-                font.family: appFont.name
-                font.pixelSize: 22
-                color: ColorPalette.midGray
-            }
-
+            // Create 'Ask anything' button
             UiButton {
-                id: newChatButton
+                id: askAnything
 
-                Layout.topMargin: 30
-                Layout.leftMargin: 30
                 Layout.alignment: Qt.AlignLeft
+                Layout.leftMargin: 30
+                Layout.rightMargin: 30
 
                 buttonHeight: 60
                 buttonWidth: explainLesson.width
@@ -77,7 +82,8 @@ Item {
             // Create quick action cards
             RowLayout {
                 Layout.fillWidth: true
-                Layout.margins: 30
+                Layout.leftMargin: 30
+                Layout.rightMargin: 30
 
                 spacing: 20
 
@@ -109,6 +115,44 @@ Item {
                     cardText: "Study plan"
                 }
             }
+
+            // Create Stat cards
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.leftMargin: 30
+                Layout.rightMargin: 30
+
+                spacing: 20
+
+                StatCard {
+                    id: totalChats
+
+                    cardTitle: "Total chats"
+                    cardValue: "83"
+                }
+
+                StatCard {
+                    id: quizzesDone
+
+                    cardTitle: "Quizzes done"
+                    cardValue: "128"
+                }
+
+                StatCard {
+                    id: cardsLearned
+
+                    cardTitle: "Cards learned"
+                    cardValue: "217"
+                }
+
+                StatCard {
+                    id: studyStreak
+
+                    cardTitle: "Study streak"
+                    cardValue: "9 days"
+                }
+            }
+
 
             Item {
                 Layout.fillHeight: true
