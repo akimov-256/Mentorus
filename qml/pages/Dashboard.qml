@@ -53,6 +53,24 @@ Item {
                 color: ColorPalette.midGray
             }
 
+            UiButton {
+                id: newChatButton
+
+                Layout.topMargin: 30
+                Layout.leftMargin: 30
+                Layout.alignment: Qt.AlignLeft
+
+                buttonHeight: 60
+                buttonWidth: explainLesson.width
+
+                buttonFillColor: ColorPalette.accentGreen
+                buttonHoverColor: ColorPalette.accentGreenHover
+                buttonPressColor: ColorPalette.accentGreenPressed
+
+                buttonText: "Ask anything"
+                buttonTextSize: 20
+            }
+
             // Create quick action cards
             RowLayout {
                 Layout.fillWidth: true
