@@ -38,25 +38,17 @@ Item {
             MessageBubble {
                 id: message1
 
-                Layout.preferredHeight: 70
-                Layout.preferredWidth: 600
-                Layout.alignment: Qt.AlignLeft
-                Layout.margins: 15
-
                 fromUser: false
                 messageDate: "9:18 AM"
+                messageText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus erat, efficitur eu cursus vitae, mattis bibendum dui. Fusce efficitur magna gravida, scelerisque nisi sit amet, fringilla leo. Pellentesque malesuada congue eros et gravida. In sagittis non enim at interdum."
             }
 
             MessageBubble {
                 id: message2
 
-                Layout.preferredHeight: 100
-                Layout.preferredWidth: 600
-                Layout.alignment: Qt.AlignRight
-                Layout.margins: 15
-
                 fromUser: true
                 messageDate: "9:18 AM"
+                messageText: "hello"
             }
 
             LineEdit {

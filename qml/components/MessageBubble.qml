@@ -7,7 +7,13 @@ Item {
     id: root
 
     property bool fromUser: true
+    property string messageText
     property string messageDate
+
+    Layout.alignment: fromUser ? Qt.AlignRight : Qt.AlignLeft
+    Layout.preferredHeight: messageTextLabel.implicitHeight + 41 // 24 for the content margins + 12 for the date text height + 5 for the spacing
+    Layout.preferredWidth: Math.min(messageTextLabel.implicitWidth + 24, parent.width * 0.7)
+    Layout.margins: 15
 
     FontLoader {
         id: appFont
@@ -38,6 +44,24 @@ Item {
                     ColorAnimation {
                         duration: 80
                     }
+                }
+
+                Text {
+                    id: messageTextLabel
+
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.margins: 12
+
+                    width: parent.width - 24
+
+                    text: messageText
+
+                    color: ColorPalette.isLight ? ColorPalette.reallyDark : ColorPalette.surface
+                    font.family: appFont.name
+                    font.pixelSize: 16
+                    wrapMode: Text.WordWrap
                 }
             }
 
