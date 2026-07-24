@@ -44,6 +44,7 @@ Item {
                 Layout.margins: 15
 
                 fromUser: false
+                messageDate: "9:18 AM"
             }
 
             MessageBubble {
@@ -55,6 +56,7 @@ Item {
                 Layout.margins: 15
 
                 fromUser: true
+                messageDate: "9:18 AM"
             }
 
             LineEdit {

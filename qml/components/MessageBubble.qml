@@ -7,6 +7,12 @@ Item {
     id: root
 
     property bool fromUser: true
+    property string messageDate
+
+    FontLoader {
+        id: appFont
+        source: "qrc:/qt/qml/Mentorus/assets/fonts/Lexend.ttf"
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -33,6 +39,18 @@ Item {
                         duration: 80
                     }
                 }
+            }
+
+            Text {
+                id: msgDate
+
+                Layout.alignment: fromUser? Qt.AlignRight : Qt.AlignLeft
+
+                text: messageDate
+
+                color: ColorPalette.midGray
+                font.family: appFont.name
+                font.pixelSize: 12
             }
         }
     }
