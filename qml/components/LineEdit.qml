@@ -28,7 +28,7 @@ Item {
         anchors.fill: parent
 
         color: ColorPalette.isLight ? ColorPalette.light : ColorPalette.deepDark
-        border.color: ColorPalette.midGray
+        border.color: ColorPalette.isLight ? ColorPalette.light : ColorPalette.dark
         border.width: 1
 
         radius: 5
