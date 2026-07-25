@@ -38,6 +38,7 @@ qt_add_qml_module(appMentorus
         qml/components/ListCard.qml
         qml/components/SidebarButton.qml
         qml/pages/AiChat.qml
+        qml/components/MessageBubble.qml
 
     RESOURCES
         assets/fonts/Lexend.ttf
@@ -59,7 +60,15 @@ qt_add_qml_module(appMentorus
         assets/icons/settingsb.png
         assets/icons/settingsg.png
         assets/icons/send.png
-        QML_FILES qml/components/MessageBubble.qml
+
+    SOURCES
+        src/ai/aimanager.h src/ai/aimanager.cpp
+        src/database/databasemanager.h src/database/databasemanager.cpp
+        src/models/chatmodel.h src/models/chatmodel.cpp
+        src/ai/promptbuilder.h src/ai/promptbuilder.cpp
+        src/models/message.h src/models/message.cpp
+        src/network/networkmanager.h src/network/networkmanager.cpp
+        src/settings/settingsmanager.h src/settings/settingsmanager.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
