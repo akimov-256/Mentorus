@@ -12,6 +12,9 @@ Item {
     property string placeHolderText
     property string iconPath
     property bool hasButton: true
+    property string userText
+
+    signal accepted()
 
     Layout.preferredHeight: boxHeignt
     Layout.preferredWidth: boxWidth
@@ -54,6 +57,8 @@ Item {
 
             // Add the text field
             TextField {
+                id: textField
+
                 Layout.fillWidth: true
 
                 font.family: appFont.name
@@ -63,9 +68,14 @@ Item {
                 color: ColorPalette.isLight ? ColorPalette.dark : ColorPalette.surface
 
                 placeholderText: placeHolderText
-
                 background: Rectangle {
                     color: "transparent"
+                }
+
+                onAccepted: {
+                    userText = text
+                    root.accepted()
+                    clear()
                 }
             }
 
@@ -84,6 +94,12 @@ Item {
 
                 iconPath: "qrc:/qt/qml/Mentorus/assets/icons/send.png"
                 iconHeight: buttonHeight - 10
+
+                onClicked: {
+                    userText = textField.text
+                    root.accepted()
+                    textField.clear()
+                }
 
                 visible: hasButton
             }

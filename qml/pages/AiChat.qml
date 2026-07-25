@@ -41,12 +41,12 @@ Item {
                 clip: true
                 spacing: 10
 
-                model: 0
+                model: chatModel
 
                 delegate: MessageBubble {
-                    fromUser: index % 2 === 0
-                    messageText: "Hello world " + index
-                    messageDate: "11:45 PM"
+                    fromUser: model.fromUser
+                    messageText: model.text
+                    messageDate: model.date
                 }
 
                 ScrollBar.vertical: ScrollBar {
@@ -68,7 +68,8 @@ Item {
             }
 
             Column {
-                anchors.centerIn: parent
+                Layout.fillHeight: true
+                Layout.fillWidth: true
                 spacing: 15
 
                 visible: chatView.model === 0
@@ -98,14 +99,18 @@ Item {
             }
 
             LineEdit {
-                id: search
+                id: userInput
 
                 Layout.fillWidth: true
                 Layout.margins: 15
                 boxHeignt: 45
 
-
                 placeHolderText: "Ask anything..."
+
+                onAccepted: {
+                    chatModel.appendUserMessage(userInput.userText)
+                    userInput.userText = ''
+                }
             }
         }
     }
