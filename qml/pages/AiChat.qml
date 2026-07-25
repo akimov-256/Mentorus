@@ -41,7 +41,7 @@ Item {
                 clip: true
                 spacing: 10
 
-                model: 10
+                model: 0
 
                 delegate: MessageBubble {
                     fromUser: index % 2 === 0
@@ -50,7 +50,9 @@ Item {
                 }
 
                 ScrollBar.vertical: ScrollBar {
-                    policy: ScrollBar.AsNeeded
+                    policy: chatView.model === 0
+                                ? ScrollBar.AlwaysOff
+                                : ScrollBar.AsNeeded
 
                     width: 15
 
@@ -62,6 +64,36 @@ Item {
                     background: Rectangle {
                         color: "transparent"
                     }
+                }
+            }
+
+            Column {
+                anchors.centerIn: parent
+                spacing: 15
+
+                visible: chatView.model === 0
+
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    text: "How can I help you today?"
+
+                    font.family: appFont.name
+                    font.pixelSize: 40
+                    font.bold: true
+
+                    color: ColorPalette.isLight ? ColorPalette.reallyDark : ColorPalette.surface
+                }
+
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    text: "Ask any question to get started."
+
+                    font.family: appFont.name
+                    font.pixelSize: 20
+
+                    color: ColorPalette.midGray
                 }
             }
 
