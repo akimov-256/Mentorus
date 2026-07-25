@@ -66,7 +66,7 @@ qt_add_qml_module(appMentorus
         src/database/databasemanager.h src/database/databasemanager.cpp
         src/models/chatmodel.h src/models/chatmodel.cpp
         src/ai/promptbuilder.h src/ai/promptbuilder.cpp
-        src/models/message.h src/models/message.cpp
+        src/models/Message.h
         src/network/networkmanager.h src/network/networkmanager.cpp
         src/settings/settingsmanager.h src/settings/settingsmanager.cpp
 )
