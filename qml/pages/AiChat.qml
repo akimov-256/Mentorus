@@ -31,24 +31,22 @@ Item {
         ColumnLayout {
             anchors.fill: parent
 
-            Item {
+            ListView {
+                id: chatView
+
+                Layout.fillWidth: true
                 Layout.fillHeight: true
-            }
 
-            MessageBubble {
-                id: message1
+                clip: true
+                spacing: 10
 
-                fromUser: false
-                messageDate: "9:18 AM"
-                messageText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus erat, efficitur eu cursus vitae, mattis bibendum dui. Fusce efficitur magna gravida, scelerisque nisi sit amet, fringilla leo. Pellentesque malesuada congue eros et gravida. In sagittis non enim at interdum."
-            }
+                model: 5
 
-            MessageBubble {
-                id: message2
-
-                fromUser: true
-                messageDate: "9:18 AM"
-                messageText: "hello"
+                delegate: MessageBubble {
+                    fromUser: index % 2 === 0
+                    messageText: "Hello world " + index
+                    messageDate: "11:45 PM"
+                }
             }
 
             LineEdit {

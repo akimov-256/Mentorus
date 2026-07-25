@@ -10,10 +10,14 @@ Item {
     property string messageText
     property string messageDate
 
-    Layout.alignment: fromUser ? Qt.AlignRight : Qt.AlignLeft
-    Layout.preferredHeight: messageTextLabel.implicitHeight + 41 // 24 for the content margins + 12 for the date text height + 5 for the spacing
-    Layout.preferredWidth: Math.min(messageTextLabel.implicitWidth + 24, parent.width * 0.7)
-    Layout.margins: 15
+    implicitHeight: messageTextLabel.implicitHeight + 41 // 24 for the content margins + 12 for the date text height + 5 for the spacing
+    width: Math.min(messageTextLabel.implicitWidth + 24, parent.width * 0.7)
+
+    anchors {
+        right: fromUser ? parent.right : undefined
+        left: fromUser ? undefined : parent.left
+        margins: 15
+    }
 
     FontLoader {
         id: appFont
