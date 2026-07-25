@@ -16,7 +16,10 @@ Item {
     anchors {
         right: fromUser ? parent.right : undefined
         left: fromUser ? undefined : parent.left
-        margins: 15
+        topMargin: 15
+        leftMargin: 15
+        rightMargin: 30
+        bottomMargin: 15
     }
 
     FontLoader {

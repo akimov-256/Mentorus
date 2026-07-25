@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Layouts
+import QtQuick.Controls
 import "../components"
 import "../theme"
 
@@ -40,12 +41,27 @@ Item {
                 clip: true
                 spacing: 10
 
-                model: 5
+                model: 10
 
                 delegate: MessageBubble {
                     fromUser: index % 2 === 0
                     messageText: "Hello world " + index
                     messageDate: "11:45 PM"
+                }
+
+                ScrollBar.vertical: ScrollBar {
+                    policy: ScrollBar.AsNeeded
+
+                    width: 15
+
+                    contentItem: Rectangle {
+                        radius: width / 2
+                        color: ColorPalette.isLight ? ColorPalette.accentGreenHover : ColorPalette.accentGreenText
+                    }
+
+                    background: Rectangle {
+                        color: "transparent"
+                    }
                 }
             }
 
