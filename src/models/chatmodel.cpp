@@ -11,6 +11,7 @@ void ChatModel::appendUserMessage(const QString &text) {
 
     // Populate the message properties
     msg.content = text;
+    msg.date = QTime::currentTime().toString("hh:mm AP");
     msg.fromUser = true;
 
     m_messages.append(msg);

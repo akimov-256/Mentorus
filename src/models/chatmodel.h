@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QAbstractListModel>
+#include <QTime>
 #include "src/models/Message.h"
 
 
