@@ -50,7 +50,7 @@ Item {
                 }
 
                 ScrollBar.vertical: ScrollBar {
-                    policy: chatView.model === 0
+                    policy: chatView.count === 0
                                 ? ScrollBar.AlwaysOff
                                 : ScrollBar.AsNeeded
 
@@ -67,34 +67,38 @@ Item {
                 }
             }
 
-            Column {
+            Item {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                spacing: 15
 
-                visible: chatView.model === 0
+                visible: chatView.count === 0
+                Column {
+                    anchors.centerIn: parent
 
-                Text {
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    spacing: 15
 
-                    text: "How can I help you today?"
+                    Text {
+                        anchors.horizontalCenter: parent.horizontalCenter
 
-                    font.family: appFont.name
-                    font.pixelSize: 40
-                    font.bold: true
+                        text: "How can I help you today?"
 
-                    color: ColorPalette.isLight ? ColorPalette.reallyDark : ColorPalette.surface
-                }
+                        font.family: appFont.name
+                        font.pixelSize: 40
+                        font.bold: true
 
-                Text {
-                    anchors.horizontalCenter: parent.horizontalCenter
+                        color: ColorPalette.isLight ? ColorPalette.reallyDark : ColorPalette.surface
+                    }
 
-                    text: "Ask any question to get started."
+                    Text {
+                        anchors.horizontalCenter: parent.horizontalCenter
 
-                    font.family: appFont.name
-                    font.pixelSize: 20
+                        text: "Ask any question to get started."
 
-                    color: ColorPalette.midGray
+                        font.family: appFont.name
+                        font.pixelSize: 20
+
+                        color: ColorPalette.midGray
+                    }
                 }
             }
 
