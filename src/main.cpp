@@ -9,10 +9,10 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    ChatModel chatModel;
-    DatabaseManager dbManager;
+    DatabaseManager *dbManager;
+    ChatModel chatModel(dbManager);
 
-    dbManager.InitializeDatabase();
+    dbManager->InitializeDatabase();
 
 
     QQmlApplicationEngine engine;

@@ -33,3 +33,16 @@ bool DatabaseManager::CreateTables() {
         return false;
     return true;
 }
+
+bool DatabaseManager::InsertMessage(const Message &message) {
+    QSqlQuery query;
+    query.prepare("INSERT INTO messages (fromUser, date, message) VALUES (:fromUser, :date, :message)");
+
+    query.bindValue(":fromUser", (message.fromUser ? 1 : 0));
+    query.bindValue(":date", message.date);
+    query.bindValue(":message", message.content);
+
+    if (!query.exec())
+        return false;
+    return true;
+}

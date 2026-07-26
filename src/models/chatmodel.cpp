@@ -1,7 +1,8 @@
 #include "chatmodel.h"
 
-ChatModel::ChatModel(QObject *parent)
+ChatModel::ChatModel(DatabaseManager *dbManager, QObject *parent)
     : QAbstractListModel(parent)
+    , m_dbManager(dbManager)
 {}
 
 void ChatModel::appendUserMessage(const QString &text) {
@@ -14,6 +15,7 @@ void ChatModel::appendUserMessage(const QString &text) {
     msg.date = QTime::currentTime().toString("hh:mm AP");
     msg.fromUser = true;
 
+    m_dbManager->InsertMessage(msg);
     m_messages.append(msg);
 
     endInsertRows();

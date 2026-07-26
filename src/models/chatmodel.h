@@ -4,8 +4,9 @@
 #include <QObject>
 #include <QAbstractListModel>
 #include <QTime>
-#include "src/models/Message.h"
 
+#include "src/models/Message.h"
+#include "src/database/databasemanager.h"
 
 
 class ChatModel : public QAbstractListModel
@@ -19,7 +20,7 @@ class ChatModel : public QAbstractListModel
     };
 
 public:
-    explicit ChatModel(QObject *parent = nullptr);
+    explicit ChatModel(DatabaseManager *dbManager, QObject *parent = nullptr);
 
     Q_INVOKABLE void appendUserMessage(const QString &text);
     Q_INVOKABLE void appendAiMessage(const QString &text);
@@ -31,6 +32,7 @@ public:
 
 private:
     QVector<Message> m_messages;
+    DatabaseManager *m_dbManager;
 
 signals:
 };
