@@ -2,6 +2,9 @@
 #define DATABASEMANAGER_H
 
 #include <QObject>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QCoreApplication>
 
 class DatabaseManager : public QObject
 {
@@ -9,6 +12,7 @@ class DatabaseManager : public QObject
 public:
     explicit DatabaseManager(QObject *parent = nullptr);
 
+    void InitializeDatabase();
 signals:
 };
 
