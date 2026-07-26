@@ -30,16 +30,24 @@ Item {
         }
 
         ColumnLayout {
+            id: layout
+
             anchors.fill: parent
 
             ListView {
                 id: chatView
 
+                Layout.topMargin: 10
+
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
+                verticalLayoutDirection: ListView.TopToBottom
+
                 clip: true
                 spacing: 10
+
+                visible: count !== 0
 
                 model: chatModel
 
@@ -52,7 +60,7 @@ Item {
                 ScrollBar.vertical: ScrollBar {
                     policy: chatView.count === 0
                                 ? ScrollBar.AlwaysOff
-                                : ScrollBar.AsNeeded
+                                : (chatView.count + 2) * 67 + 10 > layout.height ? /* 57 is the height of MessageBubble + 10 for spacing */ ScrollBar.AsNeeded : ScrollBar.AlwaysOff
 
                     width: 15
 
@@ -114,6 +122,7 @@ Item {
                 onAccepted: {
                     chatModel.appendUserMessage(userInput.userText)
                     userInput.userText = ''
+                    chatView.positionViewAtEnd()
                 }
             }
         }
