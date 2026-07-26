@@ -19,6 +19,7 @@ public:
     bool CreateTables();
 
     bool InsertMessage(const Message &message);
+    QVector<Message> LoadMessages();
 signals:
 };
 

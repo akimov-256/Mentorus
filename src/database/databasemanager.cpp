@@ -46,3 +46,32 @@ bool DatabaseManager::InsertMessage(const Message &message) {
         return false;
     return true;
 }
+
+QVector<Message> DatabaseManager::LoadMessages() {
+    QSqlQuery query;
+    if (!query.exec("SELECT fromUser, date, message FROM messages ORDER BY id"))
+    {
+        qDebug() << "failed to load messages from database: " + query.lastError().text();
+        return {};
+    }
+
+    QVector<Message> messages;
+
+    while (query.next())
+    {
+        Message msg;
+        msg.fromUser = query.value(0).toInt();
+        msg.date = query.value(1).toString();
+        msg.content = query.value(2).toString();
+
+        messages.insert(messages.begin(), msg);
+    }
+
+    // test
+    for (Message msg : messages)
+    {
+        qDebug() << msg.content;
+    }
+
+    return messages;
+}

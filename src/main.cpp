@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
     ChatModel chatModel(dbManager);
 
     dbManager->InitializeDatabase();
+    dbManager->LoadMessages();
 
 
     QQmlApplicationEngine engine;
