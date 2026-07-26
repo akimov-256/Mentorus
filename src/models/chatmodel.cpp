@@ -3,7 +3,9 @@
 ChatModel::ChatModel(DatabaseManager *dbManager, QObject *parent)
     : QAbstractListModel(parent)
     , m_dbManager(dbManager)
-{}
+{
+    m_messages = m_dbManager->LoadMessages();
+}
 
 void ChatModel::appendUserMessage(const QString &text) {
     beginInsertRows(QModelIndex(), m_messages.size(), m_messages.size());

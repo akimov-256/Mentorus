@@ -64,13 +64,7 @@ QVector<Message> DatabaseManager::LoadMessages() {
         msg.date = query.value(1).toString();
         msg.content = query.value(2).toString();
 
-        messages.insert(messages.begin(), msg);
-    }
-
-    // test
-    for (Message msg : messages)
-    {
-        qDebug() << msg.content;
+        messages.append(msg);
     }
 
     return messages;
