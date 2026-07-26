@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QSqlDatabase>
 #include <QSqlError>
+#include <QSqlQuery>
 #include <QCoreApplication>
 
 class DatabaseManager : public QObject
@@ -13,6 +14,8 @@ public:
     explicit DatabaseManager(QObject *parent = nullptr);
 
     void InitializeDatabase();
+
+    bool CreateTables();
 signals:
 };
 
