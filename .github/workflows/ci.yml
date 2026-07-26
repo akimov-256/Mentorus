@@ -16,6 +16,7 @@ jobs:
   build:
     name: Build (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
+
     strategy:
       fail-fast: false
       matrix:
@@ -33,7 +34,7 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: ${{ env.QT_VERSION }}
-          modules: qtimageformats
+          modules: qtimageformats qtsql
           cache: true
 
       - name: Configure CMake
@@ -42,35 +43,66 @@ jobs:
       - name: Build
         run: cmake --build build --config ${{ env.BUILD_TYPE }} --parallel
 
-      # ---------------- Linux packaging ----------------
+      # ---------------- Linux Packaging ----------------
+
+      - name: Remove unused SQL drivers
+        if: matrix.platform == 'linux'
+        shell: bash
+        run: |
+          QT_PLUGINS=$(qmake6 -query QT_INSTALL_PLUGINS || qmake -query QT_INSTALL_PLUGINS)
+
+          rm -f "$QT_PLUGINS/sqldrivers/libqsqlmimer.so"
+          rm -f "$QT_PLUGINS/sqldrivers/libqsqlmysql.so"
+          rm -f "$QT_PLUGINS/sqldrivers/libqsqlpsql.so"
+          rm -f "$QT_PLUGINS/sqldrivers/libqsqlodbc.so"
+
       - name: Package (Linux)
         if: matrix.platform == 'linux'
+        shell: bash
         run: |
           set -e
-          APPDIR=package/${{ env.APP_NAME }}
-          mkdir -p "$APPDIR"
-          cp build/${{ env.APP_NAME }} "$APPDIR"/
 
-          wget -q "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt.AppImage
+          APPDIR=package/${{ env.APP_NAME }}
+
+          mkdir -p "$APPDIR"
+
+          cp build/${{ env.APP_NAME }} "$APPDIR/"
+
+          wget -q \
+            https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage \
+            -O linuxdeployqt.AppImage
+
           chmod +x linuxdeployqt.AppImage
 
-          ./linuxdeployqt.AppImage "$APPDIR/${{ env.APP_NAME }}" -qmake="$(command -v qmake6 || command -v qmake)" -bundle-non-qt-libs -verbose=1
+          ./linuxdeployqt.AppImage \
+            "$APPDIR/${{ env.APP_NAME }}" \
+            -qmake="$(command -v qmake6 || command -v qmake)" \
+            -bundle-non-qt-libs \
+            -always-overwrite \
+            -verbose=2
 
           cd package
-          tar -czf ../${{ env.APP_NAME }}-linux-x86_64.tar.gz ${{ env.APP_NAME }}
+          tar -czf "../${{ env.APP_NAME }}-linux-x86_64.tar.gz" "${{ env.APP_NAME }}"
 
-      # ---------------- Windows packaging ----------------
+      # ---------------- Windows Packaging ----------------
+
       - name: Package (Windows)
         if: matrix.platform == 'windows'
         shell: pwsh
         run: |
           $AppDir = "package\${{ env.APP_NAME }}"
+
           New-Item -ItemType Directory -Force -Path $AppDir | Out-Null
+
           Copy-Item "build\${{ env.BUILD_TYPE }}\${{ env.APP_NAME }}.exe" -Destination $AppDir
 
           & windeployqt.exe --release "$AppDir\${{ env.APP_NAME }}.exe"
 
-          Compress-Archive -Path "$AppDir\*" -DestinationPath "${{ env.APP_NAME }}-windows-x86_64.zip"
+          Compress-Archive `
+            -Path "$AppDir\*" `
+            -DestinationPath "${{ env.APP_NAME }}-windows-x86_64.zip"
+
+      # ---------------- Upload ----------------
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
@@ -87,8 +119,10 @@ jobs:
     needs: build
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
+
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
@@ -98,7 +132,7 @@ jobs:
       - name: Flatten artifacts
         run: |
           mkdir -p dist
-          find artifacts -type f \( -name '*.tar.gz' -o -name '*.zip' \) -exec cp {} dist/ \;
+          find artifacts -type f \( -name "*.tar.gz" -o -name "*.zip" \) -exec cp {} dist/ \;
           ls -la dist
 
       - name: Create GitHub Release
