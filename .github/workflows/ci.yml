@@ -38,6 +38,14 @@ jobs:
       - name: Build
         run: cmake --build build --config Release --parallel
 
+      - name: Strip unused Qt SQL driver plugins
+        run: |
+          # Only the sqlite driver is used by Mentorus. The other driver plugins
+          # (mimer, odbc, psql, etc.) pull in client libraries that aren't installed
+          # on the runner, which makes linuxdeployqt's ldd check abort.
+          find "$QT_ROOT_DIR/plugins/sqldrivers" -type f ! -name 'libqsqlite.so' -delete
+          ls "$QT_ROOT_DIR/plugins/sqldrivers"
+
       - name: Download linuxdeployqt
         run: |
           wget -q https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
@@ -69,25 +77,31 @@ jobs:
           target: desktop
           arch: win64_msvc2022_64
           modules: qtimageformats
+          tools: 'tools_ninja'
           cache: true
+
+      - name: Set up MSVC environment
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
 
       - name: Configure
         shell: cmd
-        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
         shell: cmd
-        run: cmake --build build --config Release --parallel
+        run: cmake --build build --parallel
 
       - name: Deploy (windeployqt)
         shell: cmd
         run: |
-          windeployqt.exe build\Release\${{ env.APP_NAME }}.exe --qmldir qml
+          windeployqt.exe build\${{ env.APP_NAME }}.exe --qmldir qml
 
       - name: Package
         shell: pwsh
         run: |
-          Compress-Archive -Path build\Release\* -DestinationPath ${{ env.APP_NAME }}-windows.zip
+          Compress-Archive -Path build\* -DestinationPath ${{ env.APP_NAME }}-windows.zip
 
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
