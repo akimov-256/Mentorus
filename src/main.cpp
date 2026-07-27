@@ -7,6 +7,7 @@
 #include "network/networkmanager.h"
 #include "ai/aimanager.h"
 #include "ui/navigationmanager.h"
+#include "settings/settingsmanager.h"
 
 #include <QJsonObject>
 
@@ -27,11 +28,14 @@ int main(int argc, char *argv[])
 
     QObject::connect(&aiManager, &AiManager::AnswerReady, &chatModel, &ChatModel::appendAiMessage);
 
+    SettingsManager settingsManager(dbManager);
+
     QQmlApplicationEngine engine;
 
     engine.rootContext()->setContextProperty("navigation", &naviManager);
     engine.rootContext()->setContextProperty("chatModel", &chatModel);
     engine.rootContext()->setContextProperty("aiManager", &aiManager);
+    engine.rootContext()->setContextProperty("settingsManager", &settingsManager);
 
     QObject::connect(
         &engine,

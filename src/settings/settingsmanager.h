@@ -3,11 +3,19 @@
 
 #include <QObject>
 
+#include "src/database/databasemanager.h"
+#include "src/models/Setting.h"
+
 class SettingsManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit SettingsManager(QObject *parent = nullptr);
+    explicit SettingsManager(DatabaseManager *dbManager, QObject *parent = nullptr);
+
+    Q_INVOKABLE void setThemeMode(bool isLight);
+
+private:
+    DatabaseManager *m_dbManager;
 
 signals:
 };

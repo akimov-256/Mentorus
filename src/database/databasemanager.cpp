@@ -23,15 +23,34 @@ void DatabaseManager::InitializeDatabase() {
 bool DatabaseManager::CreateTables() {
     QSqlQuery query;
 
-    QString createStr = "CREATE TABLE IF NOT EXISTS messages ("
+    QString createMessages = "CREATE TABLE IF NOT EXISTS messages ("
                         "id SERIAL PRIMARY KEY,"
                         "fromUser INTEGER NOT NULL,"
                         "date TEXT NOT NULL,"
                         "message TEXT NOT NULL)";
 
-    if (!query.exec(createStr))
+    if (!query.exec(createMessages))
+        return false;
+
+    QString createSettings = "CREATE TABLE IF NOT EXISTS settings ("
+                            "name TEXT PRIMARY KEY,"
+                             "value TEXT NOT NULL)";
+
+    if (!query.exec(createSettings))
         return false;
     return true;
+}
+
+bool DatabaseManager::InsertSetting(const Setting &setting) {
+    QSqlQuery query;
+    query.prepare("INSERT INTO settings (name, value) VALUES (:name, :value) ON CONFLICT (name) DO UPDATE SET value = excluded.value");
+
+    query.bindValue(":name", setting.name);
+    query.bindValue(":value", setting.value);
+
+    if (!query.exec())
+        return true;
+    return false;
 }
 
 bool DatabaseManager::InsertMessage(const Message &message) {

@@ -73,6 +73,7 @@ qt_add_qml_module(appMentorus
         QML_FILES qml/pages/Settings.qml
         QML_FILES qml/components/SettingsRow.qml
         QML_FILES qml/components/SettingsCard.qml
+        SOURCES src/models/Setting.h
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

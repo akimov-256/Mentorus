@@ -76,7 +76,10 @@ Item {
 
                                 MouseArea {
                                     anchors.fill: parent
-                                    onClicked: ColorPalette.isLight = true
+                                    onClicked: {
+                                        ColorPalette.isLight = true
+                                        settingsManager.setThemeMode(ColorPalette.isLight)
+                                    }
                                 }
                             }
 

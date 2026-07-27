@@ -15,7 +15,6 @@ ApplicationWindow {
     visible: true
     title: "Mentorus"
 
-    property bool lightMode: Application.styleHints.colorScheme === Qt.Light
     property bool isMaximized: false
 
     FontLoader {

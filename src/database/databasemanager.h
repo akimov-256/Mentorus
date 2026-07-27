@@ -8,6 +8,7 @@
 #include <QCoreApplication>
 
 #include "src/models/Message.h"
+#include "src/models/Setting.h"
 
 class DatabaseManager : public QObject
 {
@@ -17,6 +18,8 @@ public:
 
     void InitializeDatabase();
     bool CreateTables();
+
+    bool InsertSetting(const Setting &setting);
 
     bool InsertMessage(const Message &message);
     QVector<Message> LoadMessages();
