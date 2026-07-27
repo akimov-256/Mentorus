@@ -12,7 +12,7 @@ class NetworkManager : public QObject
 public:
     explicit NetworkManager(QObject *parent = nullptr);
 
-    void PostJson(const QUrl &url, const QJsonObject &json);
+    void PostJson(const QJsonObject &json);
 
 private:
     QNetworkAccessManager m_manager;

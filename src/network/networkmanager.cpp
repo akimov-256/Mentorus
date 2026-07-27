@@ -4,10 +4,13 @@ NetworkManager::NetworkManager(QObject *parent)
     : QObject{parent}
 {}
 
-void NetworkManager::PostJson(const QUrl &url, const QJsonObject &json) {
+void NetworkManager::PostJson(const QJsonObject &json) {
+    QUrl url("https://api.groq.com/openai/v1/chat/completions");
+
     QNetworkRequest request(url);
 
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    request.setRawHeader("Authorization", "Bearer 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");
 
     QByteArray data = QJsonDocument(json).toJson();
 
@@ -27,7 +30,16 @@ void NetworkManager::PostJson(const QUrl &url, const QJsonObject &json) {
                 emit RequestFailed("Failed to parse json response");
         }
         else
+        {
+            qDebug() << "HTTP:"
+                     << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+
+            qDebug() << reply->errorString();
+
+            qDebug().noquote() << reply->readAll();
+
             emit RequestFailed(reply->errorString());
+        }
 
         reply->deleteLater();
     });
