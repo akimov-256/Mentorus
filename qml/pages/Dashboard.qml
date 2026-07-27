@@ -94,6 +94,8 @@ Item {
 
                     iconPath: "qrc:/qt/qml/Mentorus/assets/icons/book.png"
                     cardText: "Explain lesson"
+
+                    onClicked: navigation.currentPage = 1
                 }
 
                 QuickActionsCard {
@@ -101,6 +103,8 @@ Item {
 
                     iconPath: "qrc:/qt/qml/Mentorus/assets/icons/quiz.png"
                     cardText: "Generate quiz"
+
+                    onClicked: navigation.currentPage = 2
                 }
 
                 QuickActionsCard {
@@ -108,13 +112,8 @@ Item {
 
                     iconPath: "qrc:/qt/qml/Mentorus/assets/icons/cards.png"
                     cardText: "Flashcards"
-                }
 
-                QuickActionsCard {
-                    id: studyPlan
-
-                    iconPath: "qrc:/qt/qml/Mentorus/assets/icons/calendar.png"
-                    cardText: "Study plan"
+                    onClicked: navigation.currentPage = 3
                 }
             }
 
