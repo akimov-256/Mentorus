@@ -12,6 +12,7 @@ Item {
     property string placeHolderText
     property string iconPath
     property bool hasButton: true
+    property bool inputActive: true
     property string userText
 
     signal accepted()
@@ -73,9 +74,12 @@ Item {
                 }
 
                 onAccepted: {
-                    userText = text
-                    root.accepted()
-                    clear()
+                    if (inputActive)
+                    {
+                        userText = text
+                        root.accepted()
+                        clear()
+                    }
                 }
             }
 
@@ -87,6 +91,8 @@ Item {
 
                 buttonHeight: root.height - 10
                 buttonWidth: buttonHeight
+
+                buttonActive: inputActive
 
                 buttonFillColor: ColorPalette.accentGreen
                 buttonHoverColor: ColorPalette.accentGreenHover

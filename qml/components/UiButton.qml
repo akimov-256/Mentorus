@@ -15,6 +15,7 @@ Item {
     property string buttonText
     property int buttonTextSize
     property string iconPath
+    property bool buttonActive: true
 
     signal clicked()
 
@@ -32,6 +33,8 @@ Item {
         // Handle color and scale when actions are detected
         color: mouseArea.pressed ? buttonPressColor : mouseArea.containsMouse ? buttonHoverColor : buttonFillColor
         scale: mouseArea.pressed ? 0.99 : 1.0
+
+        opacity: buttonActive ? 1.0 : 0.5
 
         radius: 5
 
@@ -56,7 +59,10 @@ Item {
             hoverEnabled: true
 
             onClicked: {
-                root.clicked();
+                if (buttonActive)
+                {
+                    root.clicked();
+                }
             }
         }
 

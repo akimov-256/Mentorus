@@ -125,9 +125,11 @@ Item {
 
                 placeHolderText: "Ask anything..."
 
+                inputActive: !aiManager.isGenerating
+
                 onAccepted: {
                     chatModel.appendUserMessage(userInput.userText)
-                    aiManager.sendPrompt(userInput.userText);
+                    aiManager.sendPrompt()
                     userInput.userText = ''
                 }
             }

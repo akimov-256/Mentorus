@@ -10,6 +10,9 @@ AiManager::AiManager(NetworkManager *network, ChatModel *chatModel, QObject *par
 }
 
 void AiManager::sendPrompt() {
+    m_isGenerating = true;
+    emit isGeneratingChanged();
+
     m_network->PostJson(BuildJson());
 }
 
@@ -47,8 +50,16 @@ void AiManager::onRequestSucceeded(const QJsonDocument &response)
     QString text = message["content"].toString();
 
     emit AnswerReady(text);
+    m_isGenerating = false;
+    emit isGeneratingChanged();
 }
 
 void AiManager::onRequestFailed(const QString &error) {
     qDebug() << "request error: " + error;
+    m_isGenerating = false;
+    emit isGeneratingChanged();
+}
+
+bool AiManager::isGenerating() {
+    return m_isGenerating;
 }
