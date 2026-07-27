@@ -57,6 +57,12 @@ Item {
                     messageDate: model.date
                 }
 
+                onCountChanged: {
+                    Qt.callLater(function() {
+                        chatView.positionViewAtEnd()
+                    })
+                }
+
                 ScrollBar.vertical: ScrollBar {
                     policy: chatView.count === 0
                                 ? ScrollBar.AlwaysOff
@@ -123,7 +129,6 @@ Item {
                     chatModel.appendUserMessage(userInput.userText)
                     aiManager.sendPrompt(userInput.userText);
                     userInput.userText = ''
-                    chatView.positionViewAtEnd()
                 }
             }
         }
