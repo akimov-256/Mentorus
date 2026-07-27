@@ -23,6 +23,7 @@ private:
     void onRequestFailed(const QString &error);
 
 signals:
+    void AnswerReady(QString text);
 };
 
 #endif // AIMANAGER_H

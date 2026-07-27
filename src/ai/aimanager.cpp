@@ -32,8 +32,15 @@ QJsonObject AiManager::BuildJson(const QString &prompt) {
 
 void AiManager::onRequestSucceeded(const QJsonDocument &response)
 {
-    qDebug().noquote() << response.toJson(QJsonDocument::Indented);
+    QJsonObject root = response.object();
 
+    QJsonArray choices = root["choices"].toArray();
+    QJsonObject choice = choices[0].toObject();
+
+    QJsonObject message = choice["message"].toObject();
+    QString text = message["content"].toString();
+
+    emit AnswerReady(text);
 }
 
 void AiManager::onRequestFailed(const QString &error) {

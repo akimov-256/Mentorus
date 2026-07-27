@@ -24,13 +24,17 @@ void ChatModel::appendUserMessage(const QString &text) {
 }
 
 void ChatModel::appendAiMessage(const QString &text) {
-    Message msg;
+    beginInsertRows(QModelIndex(), m_messages.size(), m_messages.size());
 
-    // Populate the message properties
+    Message msg;
     msg.content = text;
+    msg.date = QTime::currentTime().toString("hh:mm AP");
     msg.fromUser = false;
 
+    m_dbManager->InsertMessage(msg);
     m_messages.append(msg);
+
+    endInsertRows();
 }
 
 int ChatModel::rowCount(const QModelIndex &) const {

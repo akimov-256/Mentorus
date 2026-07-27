@@ -22,6 +22,8 @@ int main(int argc, char *argv[])
 
     ChatModel chatModel(dbManager);
 
+    QObject::connect(&aiManager, &AiManager::AnswerReady, &chatModel, &ChatModel::appendAiMessage);
+
     QQmlApplicationEngine engine;
 
     engine.rootContext()->setContextProperty("chatModel", &chatModel);
