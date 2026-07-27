@@ -53,6 +53,23 @@ bool DatabaseManager::InsertSetting(const Setting &setting) {
     return false;
 }
 
+QHash<QString, QString> DatabaseManager::LoadSettings() {
+    QSqlQuery query;
+    query.prepare("SELECT name, value FROM settings");
+
+    if (!query.exec())
+        return {};
+
+    QHash<QString, QString> result;
+
+    while (query.next())
+    {
+        result[query.value(0).toString()] = query.value(1).toString();
+    }
+
+    return result;
+}
+
 bool DatabaseManager::InsertMessage(const Message &message) {
     QSqlQuery query;
     query.prepare("INSERT INTO messages (fromUser, date, message) VALUES (:fromUser, :date, :message)");

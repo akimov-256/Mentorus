@@ -20,9 +20,11 @@ public:
     bool CreateTables();
 
     bool InsertSetting(const Setting &setting);
+    QHash<QString, QString> LoadSettings();
 
     bool InsertMessage(const Message &message);
     QVector<Message> LoadMessages();
+
 signals:
 };
 

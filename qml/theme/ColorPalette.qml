@@ -3,7 +3,7 @@ pragma Singleton
 import QtQuick 2.15
 
 QtObject {
-    property bool isLight: true
+    property bool isLight: settingsManager.getThemeMode()
 
     property color deepDark: "#1f1f1f"
     property color reallyDark: "#262626"

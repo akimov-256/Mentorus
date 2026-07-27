@@ -13,9 +13,11 @@ public:
     explicit SettingsManager(DatabaseManager *dbManager, QObject *parent = nullptr);
 
     Q_INVOKABLE void setThemeMode(bool isLight);
+    Q_INVOKABLE bool getThemeMode();
 
 private:
     DatabaseManager *m_dbManager;
+    QHash<QString, QString> m_settings;
 
 signals:
 };
