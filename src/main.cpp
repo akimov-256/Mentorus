@@ -4,6 +4,9 @@
 
 #include "models/chatmodel.h"
 #include "database/databasemanager.h"
+#include "network/networkmanager.h"
+
+#include <QJsonObject>
 
 int main(int argc, char *argv[])
 {
@@ -11,6 +14,14 @@ int main(int argc, char *argv[])
 
     DatabaseManager *dbManager;
     dbManager->InitializeDatabase();
+
+    // network manager test
+    QUrl url("https://httpbin.org/post");
+    QJsonObject body;
+    body["name"] = "mentorus";
+
+    NetworkManager nManager;
+    nManager.PostJson(url, body);
 
     ChatModel chatModel(dbManager);
 
