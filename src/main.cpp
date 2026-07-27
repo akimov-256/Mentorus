@@ -5,6 +5,7 @@
 #include "models/chatmodel.h"
 #include "database/databasemanager.h"
 #include "network/networkmanager.h"
+#include "ai/aimanager.h"
 
 #include <QJsonObject>
 
@@ -15,13 +16,11 @@ int main(int argc, char *argv[])
     DatabaseManager *dbManager;
     dbManager->InitializeDatabase();
 
-    // network manager test
-    QUrl url("https://httpbin.org/post");
-    QJsonObject body;
-    body["name"] = "mentorus";
-
+    // ai manager test
     NetworkManager nManager;
-    nManager.PostJson(url, body);
+
+    AiManager aiManager(&nManager);
+    aiManager.sendPrompt("Explain recursion");
 
     ChatModel chatModel(dbManager);
 

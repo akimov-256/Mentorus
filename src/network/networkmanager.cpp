@@ -13,8 +13,21 @@ void NetworkManager::PostJson(const QUrl &url, const QJsonObject &json) {
 
     QNetworkReply *reply = m_manager.post(request, data);
 
-    connect(reply, &QNetworkReply::finished, this, [reply]() {
-        qDebug() << reply->readAll();
+    connect(reply, &QNetworkReply::finished, this, [reply, this]() {
+        if (reply->error() == QNetworkReply::NoError)
+        {
+            QByteArray data = reply->readAll();
+
+            QJsonParseError error;
+            QJsonDocument response = QJsonDocument::fromJson(data, &error);
+
+            if (error.error == QJsonParseError::NoError)
+                emit RequestSucceeded(response);
+            else
+                emit RequestFailed("Failed to parse json response");
+        }
+        else
+            emit RequestFailed(reply->errorString());
 
         reply->deleteLater();
     });

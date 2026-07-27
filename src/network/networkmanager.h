@@ -18,6 +18,8 @@ private:
     QNetworkAccessManager m_manager;
 
 signals:
+    void RequestSucceeded(const QJsonDocument &response);
+    void RequestFailed(const QString &error);
 };
 
 #endif // NETWORKMANAGER_H
