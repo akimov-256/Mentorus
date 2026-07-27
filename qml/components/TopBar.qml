@@ -53,7 +53,19 @@ Item {
                     Layout.leftMargin: 20
                     Layout.alignment: Qt.AlignVCenter
 
-                    text: "Dashboard"
+                    text: {
+                        switch (navigation.currentPage)
+                        {
+                        case 0:
+                            return "Dashboard"
+
+                        case 1:
+                            return "Ai Chat"
+
+                        case 4:
+                            return "Settings"
+                        }
+                    }
 
                     font.family: appFont.name
                     font.pixelSize: 22
