@@ -6,18 +6,21 @@
 #include <QJsonArray>
 
 #include "../network/networkmanager.h"
+#include "../models/chatmodel.h"
+#include "../models/Message.h"
 
 class AiManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit AiManager(NetworkManager *network, QObject *parent = nullptr);
+    explicit AiManager(NetworkManager *network, ChatModel *chatModel, QObject *parent = nullptr);
 
-    Q_INVOKABLE void sendPrompt(const QString &prompt);
-    QJsonObject BuildJson(const QString &prompt);
+    Q_INVOKABLE void sendPrompt();
+    QJsonObject BuildJson();
 
 private:
     NetworkManager *m_network;
+    ChatModel *m_chatModel;
 
     void onRequestSucceeded(const QJsonDocument &response);
     void onRequestFailed(const QString &error);

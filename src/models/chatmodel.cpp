@@ -59,6 +59,10 @@ QVariant ChatModel::data(const QModelIndex &index, int role) const {
     return {};
 }
 
+QVector<Message> ChatModel::GetMessages() {
+    return m_messages;
+}
+
 QHash<int, QByteArray> ChatModel::roleNames() const
 {
     return

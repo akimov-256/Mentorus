@@ -18,9 +18,9 @@ int main(int argc, char *argv[])
 
     NetworkManager nManager;
 
-    AiManager aiManager(&nManager);
-
     ChatModel chatModel(dbManager);
+
+    AiManager aiManager(&nManager, &chatModel);
 
     QObject::connect(&aiManager, &AiManager::AnswerReady, &chatModel, &ChatModel::appendAiMessage);
 

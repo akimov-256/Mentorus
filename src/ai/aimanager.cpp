@@ -1,29 +1,35 @@
 #include "aimanager.h"
 
-AiManager::AiManager(NetworkManager *network, QObject *parent)
+AiManager::AiManager(NetworkManager *network, ChatModel *chatModel, QObject *parent)
     : QObject{parent}
     , m_network(network)
+    , m_chatModel(chatModel)
 {
     connect(m_network, &NetworkManager::RequestSucceeded, this, &AiManager::onRequestSucceeded);
     connect(m_network, &NetworkManager::RequestFailed, this, &AiManager::onRequestFailed);
 }
 
-void AiManager::sendPrompt(const QString &prompt) {
-    m_network->PostJson(BuildJson(prompt));
+void AiManager::sendPrompt() {
+    m_network->PostJson(BuildJson());
 }
 
-QJsonObject AiManager::BuildJson(const QString &prompt) {
+QJsonObject AiManager::BuildJson() {
     QJsonObject body;
 
     body["model"] = "llama-3.3-70b-versatile";
 
+    QVector<Message> msgList = m_chatModel->GetMessages();
+
     QJsonArray messages;
 
-    QJsonObject message;
-    message["role"] = "user";
-    message["content"] = prompt;
+    for (Message msg : msgList)
+    {
+        QJsonObject message;
+        message["role"] = msg.fromUser ? "user" : "system";
+        message["content"] = msg.content;
 
-    messages.append(message);
+        messages.append(message);
+    }
 
     body["messages"] = messages;
 
