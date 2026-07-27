@@ -99,7 +99,10 @@ Item {
 
                                 MouseArea {
                                     anchors.fill: parent
-                                    onClicked: ColorPalette.isLight = false
+                                    onClicked: {
+                                        ColorPalette.isLight = false
+                                        settingsManager.setThemeMode(ColorPalette.isLight)
+                                    }
                                 }
                             }
                         }
