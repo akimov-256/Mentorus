@@ -81,6 +81,7 @@ Item {
                 }
             }
 
+            // Empty state page
             Item {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -116,6 +117,7 @@ Item {
                 }
             }
 
+            // User typing box
             LineEdit {
                 id: userInput
 

@@ -19,9 +19,9 @@ Item {
 
             spacing: 0
 
-            // Previous Chats list
+            // Pages area
             Rectangle {
-                id: chatsList
+                id: pagesArea
 
                 Layout.preferredWidth: 300
                 Layout.fillHeight: true
@@ -41,10 +41,12 @@ Item {
                         Layout.leftMargin: 15
                         Layout.rightMargin: 15
 
-                        activated: true
+                        activated: navigation.currentPage === 0
 
                         label: "Dashboard"
                         iconPath: "qrc:/qt/qml/Mentorus/assets/icons/home.png"
+
+                        onClicked: navigation.currentPage = 0
                     }
 
                     // Add the new chat button
@@ -55,10 +57,12 @@ Item {
                         Layout.leftMargin: 15
                         Layout.rightMargin: 15
 
-                        activated: false
+                        activated: navigation.currentPage === 1
 
                         label: "AI chat"
                         iconPath: "qrc:/qt/qml/Mentorus/assets/icons/chat.png"
+
+                        onClicked: navigation.currentPage = 1
                     }
 
                     // Add the quiz generator button
@@ -69,7 +73,7 @@ Item {
                         Layout.leftMargin: 15
                         Layout.rightMargin: 15
 
-                        activated: false
+                        activated: navigation.currentPage === 2
 
                         label: "Quiz generator"
                         iconPath: "qrc:/qt/qml/Mentorus/assets/icons/quizg.png"
@@ -83,7 +87,7 @@ Item {
                         Layout.leftMargin: 15
                         Layout.rightMargin: 15
 
-                        activated: false
+                        activated: navigation.currentPage === 3
 
                         label: "Flashcards"
                         iconPath: "qrc:/qt/qml/Mentorus/assets/icons/cardsg.png"
@@ -97,7 +101,7 @@ Item {
                         Layout.leftMargin: 15
                         Layout.rightMargin: 15
 
-                        activated: false
+                        activated: navigation.currentPage === 4
 
                         label: "Study planner"
                         iconPath: "qrc:/qt/qml/Mentorus/assets/icons/calendarg.png"
@@ -111,7 +115,7 @@ Item {
                         Layout.leftMargin: 15
                         Layout.rightMargin: 15
 
-                        activated: false
+                        activated: navigation.currentPage === 5
 
                         label: "Settings"
                         iconPath: "qrc:/qt/qml/Mentorus/assets/icons/settingsg.png"
@@ -123,7 +127,7 @@ Item {
                 }
             }
 
-            // Current Chat
+            // Current Page
             ColumnLayout {
                 id: currentChat
 
@@ -136,8 +140,22 @@ Item {
 
                 }
 
-                AiChat {
+                Loader {
+                    id: pageLoader
 
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+
+                    source: {
+                        switch (navigation.currentPage)
+                        {
+                        case 0:
+                            return "Dashboard.qml"
+
+                        case 1:
+                            return "AiChat.qml"
+                        }
+                    }
                 }
 
                 // Add the bottom border

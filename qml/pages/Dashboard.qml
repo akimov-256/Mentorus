@@ -7,8 +7,7 @@ import "../components"
 Item {
     id: root
 
-    Layout.fillHeight: true
-    Layout.fillWidth: true
+    anchors.fill: parent
 
     FontLoader {
         id: appFont
@@ -78,6 +77,8 @@ Item {
 
                 iconPath: "qrc:/qt/qml/Mentorus/assets/icons/star.png"
                 iconHeight: 32
+
+                onClicked: navigation.currentPage = 1
             }
 
             // Create quick action cards

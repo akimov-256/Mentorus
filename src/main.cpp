@@ -6,12 +6,15 @@
 #include "database/databasemanager.h"
 #include "network/networkmanager.h"
 #include "ai/aimanager.h"
+#include "ui/navigationmanager.h"
 
 #include <QJsonObject>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    NavigationManager naviManager;
 
     DatabaseManager *dbManager;
     dbManager->InitializeDatabase();
@@ -26,6 +29,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
+    engine.rootContext()->setContextProperty("navigation", &naviManager);
     engine.rootContext()->setContextProperty("chatModel", &chatModel);
     engine.rootContext()->setContextProperty("aiManager", &aiManager);
 

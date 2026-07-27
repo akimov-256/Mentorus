@@ -69,6 +69,7 @@ qt_add_qml_module(appMentorus
         src/models/Message.h
         src/network/networkmanager.h src/network/networkmanager.cpp
         src/settings/settingsmanager.h src/settings/settingsmanager.cpp
+        SOURCES src/ui/navigationmanager.h src/ui/navigationmanager.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
