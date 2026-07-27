@@ -9,6 +9,7 @@ Item {
 
     property int boxHeignt
     property int boxWidth
+    property int textPixelSize: 16
     property string placeHolderText
     property string iconPath
     property bool hasButton: true
@@ -63,7 +64,7 @@ Item {
                 Layout.fillWidth: true
 
                 font.family: appFont.name
-                font.pixelSize: 16
+                font.pixelSize: textPixelSize
 
                 placeholderTextColor: ColorPalette.midGray
                 color: ColorPalette.isLight ? ColorPalette.dark : ColorPalette.surface

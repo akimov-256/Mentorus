@@ -93,20 +93,6 @@ Item {
                         iconPath: "qrc:/qt/qml/Mentorus/assets/icons/cardsg.png"
                     }
 
-                    // Add the study planner button
-                    SidebarButton {
-                        id: studyPlanner
-
-                        Layout.alignment: Qt.AlignHCenter
-                        Layout.leftMargin: 15
-                        Layout.rightMargin: 15
-
-                        activated: navigation.currentPage === 4
-
-                        label: "Study planner"
-                        iconPath: "qrc:/qt/qml/Mentorus/assets/icons/calendarg.png"
-                    }
-
                     // Add the settings button
                     SidebarButton {
                         id: settings
@@ -115,10 +101,12 @@ Item {
                         Layout.leftMargin: 15
                         Layout.rightMargin: 15
 
-                        activated: navigation.currentPage === 5
+                        activated: navigation.currentPage === 4
 
                         label: "Settings"
                         iconPath: "qrc:/qt/qml/Mentorus/assets/icons/settingsg.png"
+
+                        onClicked: navigation.currentPage = 4
                     }
 
                     Item {
@@ -154,6 +142,9 @@ Item {
 
                         case 1:
                             return "AiChat.qml"
+
+                        case 4:
+                            return "Settings.qml"
                         }
                     }
                 }
