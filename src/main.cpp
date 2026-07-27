@@ -16,17 +16,16 @@ int main(int argc, char *argv[])
     DatabaseManager *dbManager;
     dbManager->InitializeDatabase();
 
-    // ai manager test
     NetworkManager nManager;
 
     AiManager aiManager(&nManager);
-    aiManager.sendPrompt("Explain recursion");
 
     ChatModel chatModel(dbManager);
 
     QQmlApplicationEngine engine;
 
     engine.rootContext()->setContextProperty("chatModel", &chatModel);
+    engine.rootContext()->setContextProperty("aiManager", &aiManager);
 
     QObject::connect(
         &engine,

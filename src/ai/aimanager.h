@@ -14,6 +14,7 @@ public:
     explicit AiManager(NetworkManager *network, QObject *parent = nullptr);
 
     Q_INVOKABLE void sendPrompt(const QString &prompt);
+    QJsonObject BuildJson(const QString &prompt);
 
 private:
     NetworkManager *m_network;

@@ -121,6 +121,7 @@ Item {
 
                 onAccepted: {
                     chatModel.appendUserMessage(userInput.userText)
+                    aiManager.sendPrompt(userInput.userText);
                     userInput.userText = ''
                     chatView.positionViewAtEnd()
                 }

@@ -9,6 +9,12 @@ AiManager::AiManager(NetworkManager *network, QObject *parent)
 }
 
 void AiManager::sendPrompt(const QString &prompt) {
+    QUrl url("https://postman-echo.com/post");
+
+    m_network->PostJson(url, BuildJson(prompt));
+}
+
+QJsonObject AiManager::BuildJson(const QString &prompt) {
     QJsonObject body;
 
     QJsonObject part;
@@ -25,10 +31,7 @@ void AiManager::sendPrompt(const QString &prompt) {
 
     body["contents"] = contents;
 
-    QUrl url("https://postman-echo.com/post");
-
-    m_network->PostJson(url, body);
-
+    return body;
 }
 
 void AiManager::onRequestSucceeded(const QJsonDocument &response)
