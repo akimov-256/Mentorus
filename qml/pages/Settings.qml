@@ -135,6 +135,10 @@ Item {
                             hasButton: false
 
                             placeHolderText: "Paste your API key here..."
+
+                            onTextChanged: {
+                                settingsManager.setAPIKey(apiKey.userText)
+                            }
                         }
                     }
 

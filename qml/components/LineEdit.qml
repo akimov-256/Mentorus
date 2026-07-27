@@ -17,6 +17,7 @@ Item {
     property string userText
 
     signal accepted()
+    signal textChanged()
 
     Layout.preferredHeight: boxHeignt
     Layout.preferredWidth: boxWidth
@@ -72,6 +73,10 @@ Item {
                 placeholderText: placeHolderText
                 background: Rectangle {
                     color: "transparent"
+                }
+
+                onTextChanged: {
+                    root.textChanged()
                 }
 
                 onAccepted: {

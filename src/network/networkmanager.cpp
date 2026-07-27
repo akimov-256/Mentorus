@@ -1,7 +1,8 @@
 #include "networkmanager.h"
 
-NetworkManager::NetworkManager(QObject *parent)
+NetworkManager::NetworkManager(SettingsManager *settingsMan, QObject *parent)
     : QObject{parent}
+    , m_settingsMan(settingsMan)
 {}
 
 void NetworkManager::PostJson(const QJsonObject &json) {
@@ -10,7 +11,7 @@ void NetworkManager::PostJson(const QJsonObject &json) {
     QNetworkRequest request(url);
 
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setRawHeader("Authorization", "Bearer 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");
+    request.setRawHeader("Authorization", "Bearer " + m_settingsMan->getAPIKey().toUtf8());
 
     QByteArray data = QJsonDocument(json).toJson();
 

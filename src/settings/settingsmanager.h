@@ -15,6 +15,9 @@ public:
     Q_INVOKABLE void setThemeMode(bool isLight);
     Q_INVOKABLE bool getThemeMode();
 
+    Q_INVOKABLE void setAPIKey(QString apiKey);
+    Q_INVOKABLE QString getAPIKey();
+
 private:
     DatabaseManager *m_dbManager;
     QHash<QString, QString> m_settings;

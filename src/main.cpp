@@ -20,15 +20,15 @@ int main(int argc, char *argv[])
     DatabaseManager *dbManager;
     dbManager->InitializeDatabase();
 
-    NetworkManager nManager;
+    SettingsManager settingsManager(dbManager);
+
+    NetworkManager nManager(&settingsManager);
 
     ChatModel chatModel(dbManager);
 
     AiManager aiManager(&nManager, &chatModel);
 
     QObject::connect(&aiManager, &AiManager::AnswerReady, &chatModel, &ChatModel::appendAiMessage);
-
-    SettingsManager settingsManager(dbManager);
 
     QQmlApplicationEngine engine;
 

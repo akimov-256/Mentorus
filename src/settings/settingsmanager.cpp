@@ -23,3 +23,16 @@ bool SettingsManager::getThemeMode() {
     else
         return false;
 }
+
+void SettingsManager::setAPIKey(QString apiKey) {
+    Setting setting;
+
+    setting.name = "apikey";
+    setting.value = apiKey;
+
+    m_dbManager->InsertSetting(setting);
+}
+
+QString SettingsManager::getAPIKey() {
+    return m_settings["apikey"];
+}
