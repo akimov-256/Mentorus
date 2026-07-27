@@ -124,6 +124,14 @@ Item {
                     SettingsRow {
                         rowLabel: "API key"
 
+                        Text {
+                            text: settingsManager.getAPIKey() === "" ? "Key not found" : "Key found"
+                            color: settingsManager.getAPIKey() === "" ? "#ff0000" : "#00ff00"
+
+                            font.family: appFont.name
+                            font.pixelSize: 12
+                        }
+
                         LineEdit {
                             id: apiKey
 
