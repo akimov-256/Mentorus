@@ -24,6 +24,7 @@ public:
 
     Q_INVOKABLE void appendUserMessage(const QString &text);
     Q_INVOKABLE void appendAiMessage(const QString &text);
+    Q_INVOKABLE void clearHistory();
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role) const override;

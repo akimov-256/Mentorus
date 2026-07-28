@@ -10,9 +10,6 @@ Item {
 
     anchors.fill: parent
 
-    signal clearHistoryRequested()
-    signal clearCacheRequested()
-
     FontLoader {
         id: appFont
         source: "qrc:/qt/qml/Mentorus/assets/fonts/Lexend.ttf"
@@ -201,7 +198,7 @@ Item {
                             buttonTextSize: 12
                             buttonTextColor: ColorPalette.accentGreenText
 
-                            onClicked: root.clearHistoryRequested()
+                            onClicked: chatModel.clearHistory()
                         }
                     }
 
@@ -221,8 +218,6 @@ Item {
                             buttonText: "Clear"
                             buttonTextSize: 12
                             buttonTextColor: ColorPalette.accentGreenText
-
-                            onClicked: root.clearCacheRequested()
                         }
                     }
 

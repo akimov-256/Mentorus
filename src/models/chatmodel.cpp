@@ -37,6 +37,16 @@ void ChatModel::appendAiMessage(const QString &text) {
     endInsertRows();
 }
 
+void ChatModel::clearHistory() {
+    beginResetModel();
+
+    if (!m_dbManager->ClearHistory())
+        qDebug() << "Database failed to clear history";
+    m_messages.clear();
+
+    endResetModel();
+}
+
 int ChatModel::rowCount(const QModelIndex &) const {
     return m_messages.size();
 }

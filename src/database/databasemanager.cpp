@@ -105,3 +105,11 @@ QVector<Message> DatabaseManager::LoadMessages() {
 
     return messages;
 }
+
+bool DatabaseManager::ClearHistory() {
+    QSqlQuery query;
+
+    if (!query.exec("DELETE FROM messages"))
+        return false;
+    return true;
+}
