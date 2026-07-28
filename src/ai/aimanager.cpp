@@ -1,9 +1,10 @@
 #include "aimanager.h"
 
-AiManager::AiManager(NetworkManager *network, ChatModel *chatModel, QObject *parent)
+AiManager::AiManager(NetworkManager *network, ChatModel *chatModel, SettingsManager *settingsMan, QObject *parent)
     : QObject{parent}
     , m_network(network)
     , m_chatModel(chatModel)
+    , m_settingsMan(settingsMan)
 {
     connect(m_network, &NetworkManager::RequestSucceeded, this, &AiManager::onRequestSucceeded);
     connect(m_network, &NetworkManager::RequestFailed, this, &AiManager::onRequestFailed);
@@ -25,11 +26,15 @@ QJsonObject AiManager::BuildJson() {
 
     QJsonArray messages;
 
-    for (Message msg : msgList)
+    const int maxHistory = m_settingsMan->getMaxHistory().toInt();
+
+    int start = qMax(0, msgList.size() - maxHistory);
+
+    for (int i = start; i < msgList.size(); i++)
     {
         QJsonObject message;
-        message["role"] = msg.fromUser ? "user" : "system";
-        message["content"] = msg.content;
+        message["role"] = msgList[i].fromUser ? "user" : "system";
+        message["content"] = msgList[i].content;
 
         messages.append(message);
     }

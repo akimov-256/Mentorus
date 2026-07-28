@@ -8,12 +8,13 @@
 #include "../network/networkmanager.h"
 #include "../models/chatmodel.h"
 #include "../models/Message.h"
+#include "../settings/settingsmanager.h"
 
 class AiManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit AiManager(NetworkManager *network, ChatModel *chatModel, QObject *parent = nullptr);
+    explicit AiManager(NetworkManager *network, ChatModel *chatModel, SettingsManager *settingsMan, QObject *parent = nullptr);
 
     Q_INVOKABLE void sendPrompt();
 
@@ -26,6 +27,7 @@ public:
 private:
     NetworkManager *m_network;
     ChatModel *m_chatModel;
+    SettingsManager *m_settingsMan;
 
     bool m_isGenerating = false;
 

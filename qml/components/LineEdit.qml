@@ -14,7 +14,7 @@ Item {
     property string iconPath
     property bool hasButton: true
     property bool inputActive: true
-    property string userText
+    property alias userText: textField.text
 
     signal accepted()
     signal textChanged()

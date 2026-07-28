@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
     ChatModel chatModel(dbManager);
 
-    AiManager aiManager(&nManager, &chatModel);
+    AiManager aiManager(&nManager, &chatModel, &settingsManager);
 
     QObject::connect(&aiManager, &AiManager::AnswerReady, &chatModel, &ChatModel::appendAiMessage);
 

@@ -36,3 +36,16 @@ void SettingsManager::setAPIKey(QString apiKey) {
 QString SettingsManager::getAPIKey() {
     return m_settings["apikey"];
 }
+
+void SettingsManager::setMaxHistory(QString MaxHistory) {
+    Setting setting;
+
+    setting.name = "maxhistory";
+    setting.value = MaxHistory;
+
+    m_dbManager->InsertSetting(setting);
+}
+
+QString SettingsManager::getMaxHistory() {
+    return m_settings["maxhistory"];
+}

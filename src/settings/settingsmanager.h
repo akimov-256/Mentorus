@@ -18,6 +18,9 @@ public:
     Q_INVOKABLE void setAPIKey(QString apiKey);
     Q_INVOKABLE QString getAPIKey();
 
+    Q_INVOKABLE void setMaxHistory(QString maxHistory);
+    Q_INVOKABLE QString getMaxHistory();
+
 private:
     DatabaseManager *m_dbManager;
     QHash<QString, QString> m_settings;

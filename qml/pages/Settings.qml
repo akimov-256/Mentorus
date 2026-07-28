@@ -159,48 +159,10 @@ Item {
                     }
 
                     SettingsRow {
-                        rowLabel: "Temperature"
-
-                        Slider {
-                            implicitWidth: 130
-                            from: 0
-                            to: 1
-                            value: 0.55
-
-                            background: Rectangle {
-                                x: parent.leftPadding
-                                y: parent.topPadding + parent.availableHeight / 2 - height / 2
-                                width: parent.availableWidth
-                                height: 5
-                                radius: 3
-                                color: ColorPalette.isLight
-                                    ? Qt.darker(ColorPalette.surface, 1.08)
-                                    : Qt.lighter(ColorPalette.deepDark, 1.7)
-
-                                Rectangle {
-                                    width: parent.parent.visualPosition * parent.width
-                                    height: parent.height
-                                    radius: 3
-                                    color: ColorPalette.accentGreen
-                                }
-                            }
-
-                            handle: Rectangle {
-                                x: parent.leftPadding + parent.visualPosition * (parent.availableWidth - width)
-                                y: parent.topPadding + parent.availableHeight / 2 - height / 2
-                                implicitWidth: 15
-                                implicitHeight: 15
-                                radius: 8
-                                color: ColorPalette.accentGreen
-                            }
-                        }
-                    }
-
-                    SettingsRow {
-                        rowLabel: "Max tokens"
+                        rowLabel: "Max messages loaded on prompt"
 
                         LineEdit {
-                            id: maxTokens
+                            id: maxMessages
 
                             boxHeignt: 25
                             boxWidth: 80
@@ -208,6 +170,12 @@ Item {
                             textPixelSize: 12
 
                             hasButton: false
+
+                            userText: settingsManager.getMaxHistory()
+
+                            onUserTextChanged: {
+                                settingsManager.setMaxHistory(userText)
+                            }
                         }
                     }
                 }
