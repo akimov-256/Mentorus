@@ -77,6 +77,8 @@ Item {
 
                         label: "Quiz generator"
                         iconPath: "qrc:/qt/qml/Mentorus/assets/icons/quizg.png"
+
+                        onClicked: navigation.currentPage = 2
                     }
 
                     // Add the flashcards button
@@ -142,6 +144,9 @@ Item {
 
                         case 1:
                             return "AiChat.qml"
+
+                        case 2:
+                            return "QuizSetup.qml"
 
                         case 4:
                             return "Settings.qml"

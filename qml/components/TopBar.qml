@@ -62,6 +62,12 @@ Item {
                         case 1:
                             return "Ai Chat"
 
+                        case 2:
+                            return "Quiz Generator"
+
+                        case 3:
+                            return "Flashcards"
+
                         case 4:
                             return "Settings"
                         }

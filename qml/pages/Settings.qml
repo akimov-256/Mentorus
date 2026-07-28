@@ -203,25 +203,6 @@ Item {
                     }
 
                     SettingsRow {
-                        rowLabel: "Clear cache"
-
-                        UiButton {
-                            id: clearCache
-
-                            buttonHeight: 25
-                            buttonWidth: 60
-
-                            buttonFillColor: ColorPalette.accentGreen
-                            buttonHoverColor: ColorPalette.accentGreenHover
-                            buttonPressColor: ColorPalette.accentGreenPressed
-
-                            buttonText: "Clear"
-                            buttonTextSize: 12
-                            buttonTextColor: ColorPalette.accentGreenText
-                        }
-                    }
-
-                    SettingsRow {
                         rowLabel: "About"
 
                         Text {
@@ -236,7 +217,7 @@ Item {
                         rowLabel: "Version"
 
                         Text {
-                            text: "0.1.0"
+                            text: "v0.0.0"
                             font.family: appFont.name
                             font.pixelSize: 13
                             color: ColorPalette.midGray
