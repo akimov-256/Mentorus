@@ -88,17 +88,6 @@ Item {
                         spacing: 16
 
                         LabeledField {
-                            fieldLabel: "Subject"
-                            Layout.fillWidth: true
-
-                            FormComboBox {
-                                id: subjectField
-                                Layout.fillWidth: true
-                                model: ["Biology", "Chemistry", "Physics", "Mathematics", "History"]
-                            }
-                        }
-
-                        LabeledField {
                             fieldLabel: "Topic"
                             Layout.fillWidth: true
 
@@ -106,7 +95,7 @@ Item {
                                 id: topicField
 
                                 boxHeignt: 35
-                                boxWidth: 500
+                                boxWidth: parent.implicitWidth
 
                                 textPixelSize: 12
                                 placeHolderText: "e.g. Cell respiration"

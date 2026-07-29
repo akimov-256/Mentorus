@@ -17,10 +17,12 @@ public:
     explicit AiManager(NetworkManager *network, ChatModel *chatModel, SettingsManager *settingsMan, QObject *parent = nullptr);
 
     Q_INVOKABLE void sendPrompt();
+    Q_INVOKABLE void sendQuizPrompt(QString prompt);
 
     Q_PROPERTY(bool isGenerating READ isGenerating NOTIFY isGeneratingChanged);
 
     QJsonObject BuildJson();
+    QJsonObject BuildQuizJson(QString prompt);
 
     bool isGenerating();
 

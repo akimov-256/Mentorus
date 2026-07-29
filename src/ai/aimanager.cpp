@@ -17,6 +17,10 @@ void AiManager::sendPrompt() {
     m_network->PostJson(BuildJson());
 }
 
+void AiManager::sendQuizPrompt(QString prompt) {
+    m_network->PostJson(BuildQuizJson(prompt));
+}
+
 QJsonObject AiManager::BuildJson() {
     QJsonObject body;
 
@@ -38,6 +42,35 @@ QJsonObject AiManager::BuildJson() {
 
         messages.append(message);
     }
+
+    body["messages"] = messages;
+
+    return body;
+}
+
+QJsonObject AiManager::BuildQuizJson(QString prompt)
+{
+    QJsonObject body;
+
+    body["model"] = "llama-3.3-70b-versatile";
+
+    QJsonArray messages;
+
+    // System message
+    QJsonObject systemMessage;
+    systemMessage["role"] = "system";
+    systemMessage["content"] =
+        "You are an educational quiz generator. "
+        "Always respond with ONLY valid JSON. "
+        "Do not wrap the response in markdown or add explanations.";
+
+    messages.append(systemMessage);
+
+    QJsonObject userMessage;
+    userMessage["role"] = "user";
+    userMessage["content"] = prompt;
+
+    messages.append(userMessage);
 
     body["messages"] = messages;
 
