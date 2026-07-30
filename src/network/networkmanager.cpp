@@ -5,7 +5,7 @@ NetworkManager::NetworkManager(SettingsManager *settingsMan, QObject *parent)
     , m_settingsMan(settingsMan)
 {}
 
-void NetworkManager::PostJson(const QJsonObject &json) {
+void NetworkManager::PostJson(const QJsonObject &json, const QString sender) {
     QUrl url("https://api.groq.com/openai/v1/chat/completions");
 
     QNetworkRequest request(url);
@@ -17,7 +17,7 @@ void NetworkManager::PostJson(const QJsonObject &json) {
 
     QNetworkReply *reply = m_manager.post(request, data);
 
-    connect(reply, &QNetworkReply::finished, this, [reply, this]() {
+    connect(reply, &QNetworkReply::finished, this, [reply, this, sender]() {
         if (reply->error() == QNetworkReply::NoError)
         {
             QByteArray data = reply->readAll();
@@ -26,9 +26,25 @@ void NetworkManager::PostJson(const QJsonObject &json) {
             QJsonDocument response = QJsonDocument::fromJson(data, &error);
 
             if (error.error == QJsonParseError::NoError)
-                emit RequestSucceeded(response);
+                if (sender == "chat")
+                {
+                    emit ChatRequestSucceeded(response);
+                }
+                else if (sender == "quiz")
+                {
+                    emit QuizRequestSucceeded(response);
+                }
             else
-                emit RequestFailed("Failed to parse json response");
+            {
+                if (sender == "chat")
+                {
+                    emit ChatRequestFailed("Failed to parse json response");
+                }
+                else if (sender == "quiz")
+                {
+                    emit QuizRequestFailed("Failed to parse json Quiz");
+                }
+            }
         }
         else
         {
@@ -39,7 +55,14 @@ void NetworkManager::PostJson(const QJsonObject &json) {
 
             qDebug().noquote() << reply->readAll();
 
-            emit RequestFailed(reply->errorString());
+            if (sender == "chat")
+            {
+                emit ChatRequestFailed(reply->errorString());
+            }
+            else if (sender == "quiz")
+            {
+                emit QuizRequestFailed(reply->errorString());
+            }
         }
 
         reply->deleteLater();

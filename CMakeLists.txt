@@ -80,6 +80,7 @@ qt_add_qml_module(appMentorus
         SOURCES src/models/quizmodel.h src/models/quizmodel.cpp
         SOURCES src/models/QuizQuestion.h
         SOURCES src/ai/quizmanager.h src/ai/quizmanager.cpp
+        QML_FILES qml/pages/QuizLoader.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

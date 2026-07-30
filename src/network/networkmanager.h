@@ -14,15 +14,17 @@ class NetworkManager : public QObject
 public:
     explicit NetworkManager(SettingsManager *settingsMan, QObject *parent = nullptr);
 
-    void PostJson(const QJsonObject &json);
+    void PostJson(const QJsonObject &json, const QString sender);
 
 private:
     QNetworkAccessManager m_manager;
     SettingsManager *m_settingsMan;
 
 signals:
-    void RequestSucceeded(const QJsonDocument &response);
-    void RequestFailed(const QString &error);
+    void ChatRequestSucceeded(const QJsonDocument &response);
+    void QuizRequestSucceeded(const QJsonDocument &response);
+    void ChatRequestFailed(const QString &error);
+    void QuizRequestFailed(const QString &error);
 };
 
 #endif // NETWORKMANAGER_H

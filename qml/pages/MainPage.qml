@@ -146,7 +146,7 @@ Item {
                             return "AiChat.qml"
 
                         case 2:
-                            return "QuizSetup.qml"
+                            return "QuizLoader.qml"
 
                         case 4:
                             return "Settings.qml"

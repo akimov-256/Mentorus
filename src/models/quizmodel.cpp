@@ -5,8 +5,54 @@ QuizModel::QuizModel(DatabaseManager *dbManager, QObject *parent)
     , m_dbManager(dbManager)
 {}
 
-void QuizModel::generateQuiz(QString topic, QString difficulty, int quizCount) {
+void QuizModel::setQuestions(QVector<QuizQuestion> questions) {
+    beginResetModel();
 
+    m_questions = questions;
+
+    endResetModel();
+}
+
+void QuizModel::selectAnswer(int question, int answer)
+{
+    if (question < 0 || question >= m_questions.size())
+        return;
+
+    m_questions[question].selectedIndex = answer;
+
+    QModelIndex idx = index(question);
+
+    emit dataChanged(idx, idx, { SelectedAnswerRole });
+    emit selectedAnswerChanged();
+}
+
+const QVector<QuizQuestion>& QuizModel::questions() const {
+    return m_questions;
+}
+
+int QuizModel::questionCount() const {
+    return m_questions.size();
+}
+
+QString QuizModel::question(int index) const {
+    return m_questions[index].question;
+}
+
+QStringList QuizModel::options(int index) const {
+    return m_questions[index].choicesList;
+}
+
+int QuizModel::selectedAnswer(int index) const {
+    return m_questions[index].selectedIndex;
+}
+
+void QuizModel::clear()
+{
+    beginResetModel();
+
+    m_questions.clear();
+
+    endResetModel();
 }
 
 int QuizModel::rowCount(const QModelIndex &) const {

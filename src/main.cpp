@@ -9,6 +9,7 @@
 #include "database/databasemanager.h"
 #include "network/networkmanager.h"
 #include "ai/aimanager.h"
+#include "ai/quizmanager.h"
 #include "ui/navigationmanager.h"
 #include "settings/settingsmanager.h"
 
@@ -30,17 +31,20 @@ int main(int argc, char *argv[])
 
     ChatModel chatModel(dbManager);
 
-    QuizModel quizModel(dbManager);
-
     AiManager aiManager(&nManager, &chatModel, &settingsManager);
 
     QObject::connect(&aiManager, &AiManager::AnswerReady, &chatModel, &ChatModel::appendAiMessage);
+
+    QuizModel quizModel(dbManager);
+
+    QuizManager quizManager(&aiManager, &quizModel);
 
     QQmlApplicationEngine engine;
 
     engine.rootContext()->setContextProperty("navigation", &naviManager);
     engine.rootContext()->setContextProperty("chatModel", &chatModel);
     engine.rootContext()->setContextProperty("quizModel", &quizModel);
+    engine.rootContext()->setContextProperty("quizManager", &quizManager);
     engine.rootContext()->setContextProperty("aiManager", &aiManager);
     engine.rootContext()->setContextProperty("settingsManager", &settingsManager);
 

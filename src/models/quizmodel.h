@@ -22,7 +22,17 @@ public:
 
     explicit QuizModel(DatabaseManager *dbManager, QObject *parent = nullptr);
 
-    Q_INVOKABLE void generateQuiz(QString topic, QString difficulty, int quizCount);
+    void setQuestions(QVector<QuizQuestion> questions);
+    Q_INVOKABLE void selectAnswer(int question, int answer);
+    const QVector<QuizQuestion>& questions() const;
+
+    // Helper functions
+    Q_INVOKABLE int questionCount() const;
+    Q_INVOKABLE QString question(int index) const;
+    Q_INVOKABLE QStringList options(int index) const;
+    Q_INVOKABLE int selectedAnswer(int index) const;
+
+    void clear();
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role) const override;
@@ -34,6 +44,7 @@ private:
     DatabaseManager *m_dbManager;
 
 signals:
+    void selectedAnswerChanged();
 };
 
 #endif // QUIZMODEL_H

@@ -9,49 +9,26 @@ Item {
 
     anchors.fill: parent
 
-    // Set these from Main.qml after QuizSetup.generateRequested() resolves,
-    // e.g. quizQuestion.subject = "Biology"; quizQuestion.questions = aiResult
     property string subject: "Biology"
     property string difficulty: "Medium"
-
-    // Each entry: { question: string, options: [string, string, string, string], correctIndex: int }
-    property var questions: [
-        {
-            question: "Which organelle is responsible for producing ATP in a cell?",
-            options: ["Ribosome", "Mitochondrion", "Golgi apparatus", "Nucleus"],
-            correctIndex: 1
-        },
-        {
-            question: "What is the primary pigment used in photosynthesis?",
-            options: ["Melanin", "Hemoglobin", "Chlorophyll", "Carotene"],
-            correctIndex: 2
-        },
-        {
-            question: "Which process converts glucose into usable cellular energy?",
-            options: ["Cellular respiration", "Transcription", "Osmosis", "Meiosis"],
-            correctIndex: 0
-        }
-    ]
 
     // Emitted once the user finishes the last question.
     signal finished(int correctCount, int totalCount)
 
     property int currentIndex: 0
-    property var selectedOptions: []   // selectedOptions[i] = chosen option index, -1 if unanswered
-    readonly property var currentQuestion: questions[currentIndex]
-    readonly property bool isLastQuestion: currentIndex === questions.length - 1
-    readonly property bool hasAnswer: selectedOptions[currentIndex] !== undefined && selectedOptions[currentIndex] !== -1
-
-    Component.onCompleted: {
-        var initial = []
-        for (var i = 0; i < questions.length; i++) initial.push(-1)
-        selectedOptions = initial
+    readonly property int questionCount: quizModel.questionCount()
+    readonly property bool isLastQuestion: currentIndex === questionCount - 1
+    property int refresh: 0
+    readonly property bool hasAnswer: {
+        refresh
+        return quizModel.selectedAnswer(currentIndex) !== -1
     }
 
-    function selectOption(optionIndex) {
-        var updated = selectedOptions.slice()
-        updated[currentIndex] = optionIndex
-        selectedOptions = updated
+    Connections {
+        target: quizModel
+        function onSelectedAnswerChanged() {
+            refresh++
+        }
     }
 
     function goPrevious() {
@@ -62,11 +39,7 @@ Item {
         if (!isLastQuestion) {
             currentIndex += 1
         } else {
-            var correct = 0
-            for (var i = 0; i < questions.length; i++) {
-                if (selectedOptions[i] === questions[i].correctIndex) correct += 1
-            }
-            root.finished(correct, questions.length)
+            quizManager.finishQuiz()
         }
     }
 
@@ -113,11 +86,11 @@ Item {
 
                 ProgressTrack {
                     Layout.fillWidth: true
-                    progress: (root.currentIndex + 1) / root.questions.length
+                    progress: questionCount === 0 ? 0 : (currentIndex + 1) / questionCount
                 }
 
                 Text {
-                    text: "Question " + (root.currentIndex + 1) + " of " + root.questions.length
+                    text: "Question " + (currentIndex + 1) + " of " + questionCount
 
                     font.family: appFont.name
                     font.pixelSize: 12
@@ -152,7 +125,7 @@ Item {
                     y: 16
                     width: parent.width - 32
 
-                    text: root.currentQuestion.question
+                    text: quizModel.question(root.currentIndex)
                     wrapMode: Text.WordWrap
 
                     font.family: appFont.name
@@ -170,13 +143,16 @@ Item {
                 spacing: 8
 
                 Repeater {
-                    model: root.currentQuestion.options
+                    model: quizModel.options(root.currentIndex)
 
                     OptionTile {
                         Layout.fillWidth: true
                         optionText: modelData
-                        selected: root.selectedOptions[root.currentIndex] === index
-                        onClicked: root.selectOption(index)
+                        selected: {
+                            refresh
+                            return quizModel.selectedAnswer(root.currentIndex) === index
+                        }
+                        onClicked: quizModel.selectAnswer(root.currentIndex, index)
                     }
                 }
             }
@@ -187,64 +163,41 @@ Item {
                 Layout.maximumWidth: 460
                 Layout.alignment: Qt.AlignHCenter
 
-                Rectangle {
-                    implicitWidth: 96
-                    implicitHeight: 40
-                    radius: 8
+                UiButton {
+                    buttonHeight: 40
+                    buttonWidth: 96
+
                     visible: root.currentIndex > 0
 
-                    color: ColorPalette.isLight ? ColorPalette.surface : ColorPalette.deepDark
-                    border.width: 1
-                    border.color: ColorPalette.isLight
-                        ? Qt.darker(ColorPalette.surface, 1.08)
-                        : Qt.lighter(ColorPalette.deepDark, 1.7)
+                    buttonText: "Previous"
+                    buttonTextSize: 15
 
-                    Text {
-                        anchors.centerIn: parent
-                        text: "Previous"
-                        font.family: appFont.name
-                        font.pixelSize: 13
-                        color: ColorPalette.midGray
-                    }
+                    buttonFillColor: ColorPalette.dark
+                    buttonHoverColor: ColorPalette.midGray
+                    buttonPressColor: ColorPalette.reallyDark
 
-                    MouseArea {
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: root.goPrevious()
+                    onClicked:{
+                        root.goPrevious()
                     }
                 }
 
                 Item { Layout.fillWidth: true }
 
-                Rectangle {
-                    implicitWidth: 96
-                    implicitHeight: 40
-                    radius: 8
+                UiButton {
+                    buttonHeight: 40
+                    buttonWidth: 96
 
-                    opacity: root.hasAnswer ? 1.0 : 0.5
+                    buttonActive: root.hasAnswer
 
-                    color: nextArea.pressed
-                        ? ColorPalette.accentGreenPressed
-                        : (nextArea.containsMouse ? ColorPalette.accentGreenHover : ColorPalette.accentGreen)
+                    buttonText: root.isLastQuestion ? "Finish" : "Next"
+                    buttonTextSize: 15
 
-                    Behavior on color { ColorAnimation { duration: 80 } }
+                    buttonFillColor: ColorPalette.accentGreen
+                    buttonHoverColor: ColorPalette.accentGreenHover
+                    buttonPressColor: ColorPalette.accentGreenPressed
 
-                    Text {
-                        anchors.centerIn: parent
-                        text: root.isLastQuestion ? "Finish" : "Next"
-                        font.family: appFont.name
-                        font.pixelSize: 13
-                        font.weight: Font.Medium
-                        color: ColorPalette.accentGreenText
-                    }
-
-                    MouseArea {
-                        id: nextArea
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        enabled: root.hasAnswer
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: root.goNext()
+                    onClicked:{
+                        root.goNext()
                     }
                 }
             }

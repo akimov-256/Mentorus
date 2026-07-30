@@ -16,7 +16,7 @@ class AiManager : public QObject
 public:
     explicit AiManager(NetworkManager *network, ChatModel *chatModel, SettingsManager *settingsMan, QObject *parent = nullptr);
 
-    Q_INVOKABLE void sendPrompt();
+    Q_INVOKABLE void sendChatPrompt();
     Q_INVOKABLE void sendQuizPrompt(QString prompt);
 
     Q_PROPERTY(bool isGenerating READ isGenerating NOTIFY isGeneratingChanged);
@@ -33,11 +33,14 @@ private:
 
     bool m_isGenerating = false;
 
-    void onRequestSucceeded(const QJsonDocument &response);
-    void onRequestFailed(const QString &error);
+    void onChatRequestSucceeded(const QJsonDocument &response);
+    void onQuizRequestSucceeded(const QJsonDocument &quiz);
+    void onChatRequestFailed(const QString &error);
+    void onQuizRequestFailed(const QString &error);
 
 signals:
     void AnswerReady(QString text);
+    void QuizReady(QString text);
     void isGeneratingChanged();
 };
 

@@ -180,11 +180,9 @@ Item {
                         buttonHoverColor: ColorPalette.accentGreenHover
                         buttonPressColor: ColorPalette.accentGreenPressed
 
-                        onClicked: quizModel.generateQuiz(
-                            topicField.userText,
-                            difficultyField.currentText,
-                            questionCountField.value
-                        )
+                        onClicked:{
+                            quizManager.generateQuiz(topicField.userText, difficultyField.currentText, questionCountField.value)
+                        }
                     }
                 }
             }

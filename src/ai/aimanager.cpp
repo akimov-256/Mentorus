@@ -6,19 +6,22 @@ AiManager::AiManager(NetworkManager *network, ChatModel *chatModel, SettingsMana
     , m_chatModel(chatModel)
     , m_settingsMan(settingsMan)
 {
-    connect(m_network, &NetworkManager::RequestSucceeded, this, &AiManager::onRequestSucceeded);
-    connect(m_network, &NetworkManager::RequestFailed, this, &AiManager::onRequestFailed);
+    connect(m_network, &NetworkManager::ChatRequestSucceeded, this, &AiManager::onChatRequestSucceeded);
+    connect(m_network, &NetworkManager::ChatRequestFailed, this, &AiManager::onChatRequestFailed);
+
+    connect(m_network, &NetworkManager::QuizRequestSucceeded, this, &AiManager::onQuizRequestSucceeded);
+    connect(m_network, &NetworkManager::QuizRequestFailed, this, &AiManager::onQuizRequestFailed);
 }
 
-void AiManager::sendPrompt() {
+void AiManager::sendChatPrompt() {
     m_isGenerating = true;
     emit isGeneratingChanged();
 
-    m_network->PostJson(BuildJson());
+    m_network->PostJson(BuildJson(), "chat");
 }
 
 void AiManager::sendQuizPrompt(QString prompt) {
-    m_network->PostJson(BuildQuizJson(prompt));
+    m_network->PostJson(BuildQuizJson(prompt), "quiz");
 }
 
 QJsonObject AiManager::BuildJson() {
@@ -87,7 +90,7 @@ QJsonObject AiManager::BuildQuizJson(QString prompt)
     return body;
 }
 
-void AiManager::onRequestSucceeded(const QJsonDocument &response)
+void AiManager::onChatRequestSucceeded(const QJsonDocument &response)
 {
     QJsonObject root = response.object();
 
@@ -102,10 +105,32 @@ void AiManager::onRequestSucceeded(const QJsonDocument &response)
     emit isGeneratingChanged();
 }
 
-void AiManager::onRequestFailed(const QString &error) {
+void AiManager::onQuizRequestSucceeded(const QJsonDocument &response)
+{
+    QJsonObject root = response.object();
+
+    QJsonArray choices = root["choices"].toArray();
+    if (choices.isEmpty())
+    {
+        return;
+    }
+
+    QJsonObject choice = choices.first().toObject();
+    QJsonObject message = choice["message"].toObject();
+
+    QString quizJson = message["content"].toString();
+
+    emit QuizReady(quizJson);
+}
+
+void AiManager::onChatRequestFailed(const QString &error) {
     qDebug() << "request error: " + error;
     m_isGenerating = false;
     emit isGeneratingChanged();
+}
+
+void AiManager::onQuizRequestFailed(const QString &error) {
+    qDebug() << "request error: " + error;
 }
 
 bool AiManager::isGenerating() {
