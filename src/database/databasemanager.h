@@ -25,6 +25,8 @@ public:
     bool InsertMessage(const Message &message);
     QVector<Message> LoadMessages();
 
+    bool InsertLastQuizScore(const int &score, const int &total);
+
     bool ClearHistory();
 
 signals:

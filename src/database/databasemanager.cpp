@@ -24,7 +24,7 @@ bool DatabaseManager::CreateTables() {
     QSqlQuery query;
 
     QString createMessages = "CREATE TABLE IF NOT EXISTS messages ("
-                        "id SERIAL PRIMARY KEY,"
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                         "fromUser INTEGER NOT NULL,"
                         "date TEXT NOT NULL,"
                         "message TEXT NOT NULL)";
@@ -34,10 +34,19 @@ bool DatabaseManager::CreateTables() {
 
     QString createSettings = "CREATE TABLE IF NOT EXISTS settings ("
                             "name TEXT PRIMARY KEY,"
-                             "value TEXT NOT NULL)";
+                            "value TEXT NOT NULL)";
 
     if (!query.exec(createSettings))
         return false;
+
+    QString createQuizzes = "CREATE TABLE IF NOT EXISTS quizzes ("
+                            "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                            "score INTEGER NOT NULL,"
+                            "total INTEGER NOT NULL)";
+
+    if (!query.exec(createQuizzes))
+        return false;
+
     return true;
 }
 
@@ -104,6 +113,18 @@ QVector<Message> DatabaseManager::LoadMessages() {
     }
 
     return messages;
+}
+
+bool DatabaseManager::InsertLastQuizScore(const int &score, const int &total) {
+    QSqlQuery query;
+    query.prepare("INSERT INTO quizzes (score, total) VALUES (:score, :total)");
+
+    query.bindValue(":score", score);
+    query.bindValue(":total", total);
+
+    if (!query.exec())
+        return false;
+    return true;
 }
 
 bool DatabaseManager::ClearHistory() {

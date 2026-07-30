@@ -5,12 +5,13 @@
 
 #include "aimanager.h"
 #include "../models/quizmodel.h"
+#include "../database/databasemanager.h"
 
 class QuizManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit QuizManager(AiManager *aiManager, QuizModel *quizModel, QObject *parent = nullptr);
+    explicit QuizManager(AiManager *aiManager, DatabaseManager *dbManager, QuizModel *quizModel, QObject *parent = nullptr);
 
     Q_INVOKABLE void generateQuiz(QString topic, QString difficulty, int count);
     Q_INVOKABLE void finishQuiz();
@@ -18,6 +19,7 @@ public:
 private:
     AiManager *m_aiManager;
     QuizModel *m_quizModel;
+    DatabaseManager *m_dbManager;
 
     QString buildPrompt(QString topic, QString difficulty, int count);
     bool ParseQuiz(const QString &json);

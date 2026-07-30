@@ -187,6 +187,29 @@ Item {
                 }
             }
 
+            Rectangle {
+                Layout.fillWidth: true
+                implicitHeight: lastResultsColumn.implicitHeight + 32
+                radius: 10
+
+                color: ColorPalette.isLight
+                    ? Qt.darker(ColorPalette.surface, 1.02)
+                    : Qt.lighter(ColorPalette.deepDark, 1.35)
+
+                border.width: 1
+                border.color: ColorPalette.isLight
+                    ? Qt.darker(ColorPalette.surface, 1.08)
+                    : Qt.lighter(ColorPalette.deepDark, 1.7)
+
+                Behavior on color { ColorAnimation { duration: 80 } }
+                Behavior on border.color { ColorAnimation { duration: 80 } }
+
+                ColumnLayout {
+                    id: lastResultsColumn
+                }
+
+            }
+
             Item {
                 Layout.fillHeight: true
             }

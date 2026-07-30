@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 
     QuizModel quizModel(dbManager);
 
-    QuizManager quizManager(&aiManager, &quizModel);
+    QuizManager quizManager(&aiManager, dbManager, &quizModel);
 
     QQmlApplicationEngine engine;
 

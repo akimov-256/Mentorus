@@ -1,8 +1,9 @@
 #include "quizmanager.h"
 
-QuizManager::QuizManager(AiManager *aiManager, QuizModel *quizModel, QObject *parent)
+QuizManager::QuizManager(AiManager *aiManager, DatabaseManager *dbManager, QuizModel *quizModel, QObject *parent)
     : QObject{parent}
     , m_aiManager(aiManager)
+    , m_dbManager(dbManager)
     , m_quizModel(quizModel)
 {
     connect(aiManager, &AiManager::QuizReady, this, &QuizManager::onQuizReady);
@@ -93,6 +94,8 @@ int QuizManager::calculateScore() const
         if (question.selectedIndex == question.correctIndex)
             score++;
     }
+
+    m_dbManager->InsertLastQuizScore(score, m_quizModel->rowCount());
 
     return score;
 }
