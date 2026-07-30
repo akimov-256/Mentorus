@@ -83,19 +83,21 @@ Item {
                     width: parent.width - 32
                     spacing: 18
 
-                    RowLayout {
+                    LabeledField {
+                        fieldLabel: "Topic"
                         Layout.fillWidth: true
-                        spacing: 16
+                        Layout.preferredHeight: 35
+                        Layout.bottomMargin: 10
 
-                        LabeledField {
-                            fieldLabel: "Topic"
-                            Layout.fillWidth: true
+
+                        RowLayout {
+                            anchors.fill: parent
 
                             LineEdit {
                                 id: topicField
 
+                                Layout.fillWidth: true
                                 boxHeignt: 35
-                                boxWidth: parent.implicitWidth
 
                                 textPixelSize: 12
                                 placeHolderText: "e.g. Cell respiration"
@@ -105,9 +107,11 @@ Item {
                         }
                     }
 
+
                     RowLayout {
                         Layout.fillWidth: true
                         spacing: 16
+                        Layout.bottomMargin: 10
 
                         LabeledField {
                             fieldLabel: "Difficulty"
@@ -161,44 +165,8 @@ Item {
                     }
 
                     // Generate button
-                    Rectangle {
-                        Layout.topMargin: 4
-                        Layout.preferredWidth: 160
-                        Layout.preferredHeight: 46
-                        radius: 8
-
-                        color: generateArea.pressed
-                            ? ColorPalette.accentGreenPressed
-                            : (generateArea.containsMouse ? ColorPalette.accentGreenHover : ColorPalette.accentGreen)
-
-                        Behavior on color { ColorAnimation { duration: 80 } }
-
-                        Text {
-                            anchors.centerIn: parent
-                            text: "Generate quiz"
-
-                            font.family: appFont.name
-                            font.pixelSize: 15
-                            font.weight: Font.Medium
-                            color: ColorPalette.accentGreenText
-                        }
-
-                        MouseArea {
-                            id: generateArea
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: root.generateRequested(
-                                subjectField.currentText,
-                                topicField.text,
-                                difficultyField.currentText,
-                                questionCountField.value
-                            )
-                        }
-                    }
-
                     UiButton {
-                        Layout.margins: 8
+                        id: generateButton
 
                         buttonHeight: 46
                         buttonWidth: 160
@@ -210,8 +178,7 @@ Item {
                         buttonHoverColor: ColorPalette.accentGreenHover
                         buttonPressColor: ColorPalette.accentGreenPressed
 
-                        onClicked: root.generateRequested(
-                            subjectField.currentText,
+                        onClicked: quizModel.generateQuiz(
                             topicField.text,
                             difficultyField.currentText,
                             questionCountField.value
