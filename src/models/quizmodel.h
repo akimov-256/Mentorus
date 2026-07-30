@@ -22,10 +22,15 @@ public:
 
     explicit QuizModel(DatabaseManager *dbManager, QObject *parent = nullptr);
 
-    void generateQuiz(QString topic, QString difficulty, int quizCount);
+    Q_INVOKABLE void generateQuiz(QString topic, QString difficulty, int quizCount);
+
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
+
+    QHash<int, QByteArray> roleNames() const override;
 
 private:
-    QVector<QuizQuestion> questions;
+    QVector<QuizQuestion> m_questions;
     DatabaseManager *m_dbManager;
 
 signals:

@@ -7,6 +7,7 @@ struct QuizQuestion
 {
     QString question;
     QVector<QString> choicesList;
+    int selectedIndex;
     int correctIndex;
 };
 

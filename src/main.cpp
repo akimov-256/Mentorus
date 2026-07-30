@@ -5,6 +5,7 @@
 #include <QIcon>
 
 #include "models/chatmodel.h"
+#include "models/quizmodel.h"
 #include "database/databasemanager.h"
 #include "network/networkmanager.h"
 #include "ai/aimanager.h"
@@ -29,6 +30,8 @@ int main(int argc, char *argv[])
 
     ChatModel chatModel(dbManager);
 
+    QuizModel quizModel(dbManager);
+
     AiManager aiManager(&nManager, &chatModel, &settingsManager);
 
     QObject::connect(&aiManager, &AiManager::AnswerReady, &chatModel, &ChatModel::appendAiMessage);
@@ -37,6 +40,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("navigation", &naviManager);
     engine.rootContext()->setContextProperty("chatModel", &chatModel);
+    engine.rootContext()->setContextProperty("quizModel", &quizModel);
     engine.rootContext()->setContextProperty("aiManager", &aiManager);
     engine.rootContext()->setContextProperty("settingsManager", &settingsManager);
 
