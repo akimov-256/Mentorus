@@ -171,6 +171,8 @@ Item {
                         buttonHeight: 46
                         buttonWidth: 160
 
+                        buttonActive: topicField.userText !== ""
+
                         buttonText: "Generate Quiz"
                         buttonTextSize: 15
 
@@ -179,7 +181,7 @@ Item {
                         buttonPressColor: ColorPalette.accentGreenPressed
 
                         onClicked: quizModel.generateQuiz(
-                            topicField.text,
+                            topicField.userText,
                             difficultyField.currentText,
                             questionCountField.value
                         )
