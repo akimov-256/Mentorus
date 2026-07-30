@@ -30,6 +30,16 @@ QJsonObject AiManager::BuildJson() {
 
     QJsonArray messages;
 
+    // System message
+    QJsonObject systemMessage;
+    systemMessage["role"] = "system";
+    systemMessage["content"] =
+        "You are an educational mentor. "
+        "Always respond with ONLY text. "
+        "Do not wrap the response in markdown.";
+
+    messages.append(systemMessage);
+
     const int maxHistory = m_settingsMan->getMaxHistory().toInt();
 
     int start = qMax(0, msgList.size() - maxHistory);
