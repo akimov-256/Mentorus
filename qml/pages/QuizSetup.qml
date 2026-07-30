@@ -196,6 +196,27 @@ Item {
                             )
                         }
                     }
+
+                    UiButton {
+                        Layout.margins: 8
+
+                        buttonHeight: 46
+                        buttonWidth: 160
+
+                        buttonText: "Generate Quiz"
+                        buttonTextSize: 15
+
+                        buttonFillColor: ColorPalette.accentGreen
+                        buttonHoverColor: ColorPalette.accentGreenHover
+                        buttonPressColor: ColorPalette.accentGreenPressed
+
+                        onClicked: root.generateRequested(
+                            subjectField.currentText,
+                            topicField.text,
+                            difficultyField.currentText,
+                            questionCountField.value
+                        )
+                    }
                 }
             }
 
