@@ -1,7 +1,7 @@
 #include "quizmodel.h"
 
 QuizModel::QuizModel(DatabaseManager *dbManager, QObject *parent)
-    : QObject{parent}
+    : QAbstractListModel(parent)
     , m_dbManager(dbManager)
 {}
 

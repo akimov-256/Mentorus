@@ -22,6 +22,7 @@ public:
 
     explicit QuizModel(DatabaseManager *dbManager, QObject *parent = nullptr);
 
+    void generateQuiz(QString topic, QString difficulty, int quizCount);
 
 private:
     QVector<QuizQuestion> questions;

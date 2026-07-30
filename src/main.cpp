@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QJsonObject>
+#include <QIcon>
 
 #include "models/chatmodel.h"
 #include "database/databasemanager.h"
@@ -9,11 +11,12 @@
 #include "ui/navigationmanager.h"
 #include "settings/settingsmanager.h"
 
-#include <QJsonObject>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    app.setWindowIcon(QIcon(":/qt/qml/Mentorus/assets/icons/mentorus.png"));
 
     NavigationManager naviManager;
 

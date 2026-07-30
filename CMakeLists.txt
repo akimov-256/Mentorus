@@ -60,6 +60,7 @@ qt_add_qml_module(appMentorus
         assets/icons/settingsb.png
         assets/icons/settingsg.png
         assets/icons/send.png
+        assets/icons/mentorus.png
 
     SOURCES
         src/ai/aimanager.h src/ai/aimanager.cpp
