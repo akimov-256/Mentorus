@@ -81,20 +81,6 @@ Item {
                         onClicked: navigation.currentPage = 2
                     }
 
-                    // Add the flashcards button
-                    SidebarButton {
-                        id: flashcards
-
-                        Layout.alignment: Qt.AlignHCenter
-                        Layout.leftMargin: 15
-                        Layout.rightMargin: 15
-
-                        activated: navigation.currentPage === 3
-
-                        label: "Flashcards"
-                        iconPath: "qrc:/qt/qml/Mentorus/assets/icons/cardsg.png"
-                    }
-
                     // Add the settings button
                     SidebarButton {
                         id: settings

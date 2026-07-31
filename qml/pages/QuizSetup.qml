@@ -192,6 +192,8 @@ Item {
                 implicitHeight: lastResultsColumn.implicitHeight + 32
                 radius: 10
 
+                visible: false
+
                 color: ColorPalette.isLight
                     ? Qt.darker(ColorPalette.surface, 1.02)
                     : Qt.lighter(ColorPalette.deepDark, 1.35)

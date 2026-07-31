@@ -217,7 +217,7 @@ Item {
                         rowLabel: "Version"
 
                         Text {
-                            text: "v0.0.0"
+                            text: "v1.0.0"
                             font.family: appFont.name
                             font.pixelSize: 13
                             color: ColorPalette.midGray

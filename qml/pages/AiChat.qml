@@ -131,7 +131,7 @@ Item {
 
                 onAccepted: {
                     chatModel.appendUserMessage(userInput.userText)
-                    aiManager.sendPrompt()
+                    aiManager.sendChatPrompt()
                     userInput.userText = ''
                 }
             }
